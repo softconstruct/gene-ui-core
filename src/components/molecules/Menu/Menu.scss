@@ -169,6 +169,13 @@
     */
     }
 
+    &__loader {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        place-content: center;
+    }
+
     &__header {
         flex: 0 0 auto;
         display: flex;

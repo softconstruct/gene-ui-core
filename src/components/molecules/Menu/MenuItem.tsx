@@ -6,23 +6,28 @@ interface IMenuItemProps {
     selected?: boolean;
     children: ReactNode;
     title?: string;
-    controlHandler?: (index: number, isBack?: boolean) => void;
+    onChangeHandler?: (index: number, isBack?: boolean) => void;
     activeElement?: boolean;
     index: number;
     defaultOpened?: never;
+    isLoading?: never;
     IconBefore?: FC<IconProps>;
     IconAfter?: FC<IconProps>;
+    danger?: boolean;
+    disabled?: boolean;
 }
 
 const MenuItem: FC<IMenuItemProps> = ({
     children,
     title,
-    controlHandler,
+    onChangeHandler,
     activeElement,
     index,
     selected,
     IconBefore,
-    IconAfter
+    IconAfter,
+    danger,
+    disabled
 }) => {
     return (
         <>
@@ -31,9 +36,13 @@ const MenuItem: FC<IMenuItemProps> = ({
                     {/* Parent menu item */}
                     <button
                         type="button"
-                        className="menu__item"
+                        className={classNames("menu__item", {
+                            menu__item_danger: danger,
+                            menu__item_disabled: disabled
+                        })}
+                        {...(disabled ? { tabIndex: "-1" } : {})}
                         onClick={() => {
-                            controlHandler(index, false, true);
+                            onChangeHandler(index, false, true);
                         }}
                     >
                         <span className="menu__cell">
@@ -45,14 +54,15 @@ const MenuItem: FC<IMenuItemProps> = ({
                     {/* menu list wrapper */}
                     <div
                         className={classNames("menu__list  ", {
-                            menu__list_current: activeElement
+                            menu__list_current: activeElement,
+                            menu__item_disabled: disabled
                         })}
                     >
                         {/* header */}
                         <button
                             type="button"
                             className="menu__header"
-                            onClick={() => controlHandler(index, true, true)}
+                            onClick={() => onChangeHandler(index, true, true)}
                         >
                             <ChevronLeft className="menu__icon menu__icon_before" size={20} />
                             <p className="menu__headerTitle">{title}</p>
@@ -62,7 +72,16 @@ const MenuItem: FC<IMenuItemProps> = ({
                 </>
             ) : (
                 // Simple menu item
-                <button type="button" className="menu__item" onClick={() => controlHandler(index, false)}>
+                <button
+                    type="button"
+                    className={classNames("menu__item", {
+                        menu__item_danger: danger,
+                        menu__item_selected: selected,
+                        menu__item_disabled: disabled
+                    })}
+                    onClick={() => onChangeHandler(index, false)}
+                    {...(disabled ? { tabIndex: "-1" } : {})}
+                >
                     <span className="menu__cell">
                         {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
                         <span className="menu__itemTitle">{children}</span>

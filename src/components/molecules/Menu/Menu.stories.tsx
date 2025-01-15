@@ -13,7 +13,8 @@ const meta: Meta<typeof Menu> = {
     title: "Molecules/Menu",
     component: Menu,
     argTypes: {
-        className: args({ control: "false", ...propCategory.appearance })
+        className: args({ control: "false", ...propCategory.appearance }),
+        isLoading: args({ control: "boolean", ...propCategory.state })
     },
     args: {} as IMenuProps
 };
@@ -25,8 +26,8 @@ const Template: FC<IMenuProps> = (props) => {
 };
 
 const data = [
-    { title: "item 1", selected: false, id: "1233", value: "name1", IconBefore: Globe },
-    { title: "item 2", selected: false, id: "123fd343", value: "name3", IconAfter: LightBulb },
+    { title: "item 1", selected: false, id: "1233", value: "name1", IconBefore: Globe, danger: true },
+    { title: "item 2", selected: false, id: "123fd343", value: "name3", IconAfter: LightBulb, danger: true },
     {
         title: "item 3",
         selected: false,
@@ -34,12 +35,13 @@ const data = [
         value: "name4",
         IconBefore: Globe,
         children: [
-            { title: "item 44", selected: false, id: "1d23s3", value: "name55" },
+            { title: "item 44", selected: false, id: "1d23s3", value: "name55", disabled: true },
             {
                 title: "item 555",
                 selected: false,
                 id: "12as3343",
                 value: "name355",
+                isLoading: true,
                 children: [
                     { title: "item 44", selected: false, id: "1s23s3", value: "name55" },
                     { title: "item 555", selected: false, id: "12as33f43", value: "name355" },
@@ -48,7 +50,6 @@ const data = [
                         selected: false,
                         id: "123sdsd6343",
                         value: "name4ff",
-                        defaultOpened: true,
                         children: [
                             { title: "item 44", selected: false, id: "123s3", value: "name55" },
                             { title: "item 555", selected: true, id: "1d2as3343", value: "name355" }
@@ -61,6 +62,7 @@ const data = [
                 selected: false,
                 id: "123sdsd6343",
                 value: "name4ff",
+                // defaultOpened: true,
                 children: [
                     { title: "item 44", selected: false, id: "1fgf23s3", value: "name55" },
                     { title: "item 555", selected: true, id: "12as334df3", value: "name355" }
@@ -78,9 +80,12 @@ const MenuItemRecusion = (menuData) => {
                 selected={el.selected}
                 index={i}
                 title={el.children ? el.title : ""}
-                defaultOpened={el.defaultOpened}
+                defaultOpened={el?.defaultOpened}
                 IconBefore={el.IconBefore}
                 IconAfter={el.IconAfter}
+                danger={el.danger}
+                disabled={el.disabled}
+                isLoading={el.isLoading}
             >
                 {el.children ? MenuItemRecusion(el.children) : el.title}
             </MenuItem>
@@ -88,7 +93,7 @@ const MenuItemRecusion = (menuData) => {
     });
 };
 
-const TemplateNext: FC<IMenuProps> = () => {
+const TemplateNext: FC<IMenuProps> = (props) => {
     const [menuData, setMenuData] = useState(data);
     const updateMenuData = (menu, paths, depth = 0) => {
         return menu.map((item, index) => {
@@ -103,7 +108,7 @@ const TemplateNext: FC<IMenuProps> = () => {
         });
     };
 
-    const control = (paths) => {
+    const onChange = (paths) => {
         const updatedMenuData = updateMenuData(menuData, paths);
         setMenuData(updatedMenuData);
     };
@@ -111,7 +116,9 @@ const TemplateNext: FC<IMenuProps> = () => {
     const Elements = MenuItemRecusion(menuData);
     return (
         <div style={{ height: "98vh" }}>
-            <Menu control={control}>{Elements}</Menu>
+            <Menu onChange={onChange} {...props}>
+                {Elements}
+            </Menu>
         </div>
     );
 };
