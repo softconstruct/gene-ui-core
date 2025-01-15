@@ -33,13 +33,12 @@ interface IMenuProps {
     className?: string;
     children: ReactElement;
     isLoading?: boolean;
-    onChange: (paths: number[]) => void;
+    onChange: (paths: number[], id: string | number) => void;
 }
 
 /**
  * Menu component provides a list of options or actions available to the user within a specific context. Menus are used to offer additional functionality without cluttering the interface, allowing users to access commands, navigate to different sections, or modify settings quickly and efficiently.
  */
-let CHNGED_PATHS = [];
 
 const cloneChildrenRecursive = (children, onChangeHandler, paths, props, regardingPaths = [], isLoading = false) => {
     if (isLoading) {
@@ -49,13 +48,10 @@ const cloneChildrenRecursive = (children, onChangeHandler, paths, props, regardi
             </div>
         );
     }
+
     return Children.map(children, (child, i) => {
         const isActive = paths?.length && i === paths[0];
-        // If it's active, process its children with the remaining paths
 
-        if (child.props?.defaultOpened) {
-            CHNGED_PATHS = [...regardingPaths, i];
-        }
         const childProps =
             isActive && child.props?.children
                 ? {
@@ -93,26 +89,23 @@ const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
         }
     }, []);
 
-    const onChangeHandler = (index, isBack: boolean, routeAction: boolean) => {
+    const onChangeHandler = (index, id, isBack: boolean, routeAction: boolean) => {
+        onChange(path, id);
         if (routeAction) {
             if (isBack) {
                 const newSteps = stepBackArray(path);
-                onChange(newSteps);
+                onChange(newSteps, id);
                 setPath(newSteps);
             } else {
                 setPath((prev) => [...prev, index]);
             }
         }
         if (!isBack) {
-            onChange([...path, index]);
+            onChange([...path, index], id);
         }
     };
 
     const clonedChildren = cloneChildrenRecursive(children, onChangeHandler, path);
-
-    useEffect(() => {
-        setPath(CHNGED_PATHS);
-    }, []);
 
     return (
         <>

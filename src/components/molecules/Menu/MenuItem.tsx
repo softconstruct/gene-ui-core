@@ -6,7 +6,7 @@ interface IMenuItemProps {
     selected?: boolean;
     children: ReactNode;
     title?: string;
-    onChangeHandler?: (index: number, isBack?: boolean) => void;
+    onChangeHandler?: (index: number, id: number | string, isBack?: boolean, routeAction?: boolean) => void;
     activeElement?: boolean;
     index: number;
     defaultOpened?: never;
@@ -15,6 +15,7 @@ interface IMenuItemProps {
     IconAfter?: FC<IconProps>;
     danger?: boolean;
     disabled?: boolean;
+    id?: number | string;
 }
 
 const MenuItem: FC<IMenuItemProps> = ({
@@ -27,7 +28,8 @@ const MenuItem: FC<IMenuItemProps> = ({
     IconBefore,
     IconAfter,
     danger,
-    disabled
+    disabled,
+    id
 }) => {
     return (
         <>
@@ -42,7 +44,7 @@ const MenuItem: FC<IMenuItemProps> = ({
                         })}
                         {...(disabled ? { tabIndex: "-1" } : {})}
                         onClick={() => {
-                            onChangeHandler(index, false, true);
+                            onChangeHandler(index, id, false, true);
                         }}
                     >
                         <span className="menu__cell">
@@ -62,7 +64,7 @@ const MenuItem: FC<IMenuItemProps> = ({
                         <button
                             type="button"
                             className="menu__header"
-                            onClick={() => onChangeHandler(index, true, true)}
+                            onClick={() => onChangeHandler(index, id, true, true)}
                         >
                             <ChevronLeft className="menu__icon menu__icon_before" size={20} />
                             <p className="menu__headerTitle">{title}</p>
@@ -79,7 +81,7 @@ const MenuItem: FC<IMenuItemProps> = ({
                         menu__item_selected: selected,
                         menu__item_disabled: disabled
                     })}
-                    onClick={() => onChangeHandler(index, false)}
+                    onClick={() => onChangeHandler(index, id, false)}
                     {...(disabled ? { tabIndex: "-1" } : {})}
                 >
                     <span className="menu__cell">
