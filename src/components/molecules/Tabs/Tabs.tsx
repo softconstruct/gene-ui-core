@@ -186,33 +186,38 @@ const Tabs: FC<ITabsProps> = ({
             <div className={classNames(`tabs tabs_${direction} tabs_${type}`, className, direction, type)}>
                 <div className="tabs__nav" role="tablist" aria-label="Sample Tabs">
                     {isHorizontal && showArrows && (
-                        <Button
-                            className="tabs__nav_button"
-                            Icon={ChevronLeft}
-                            size={size}
-                            ref={leftButtonRef}
-                            appearance="secondary"
-                            displayType="text"
-                            onClick={() => slideShift()}
-                        />
+                        <div className="tabs__nav_button">
+                            <Button
+                                Icon={ChevronLeft}
+                                size={size}
+                                ref={leftButtonRef}
+                                appearance="secondary"
+                                displayType="text"
+                                onClick={() => slideShift()}
+                            />
+                        </div>
                     )}
 
-                    <div className="tabs__list" ref={parentRef} onWheel={scrollHandler}>
-                        {Children.map(children, (child, index) =>
-                            cloneElement(child, { iconBefore, ...child.props, index })
-                        )}
+                    <div className="tabs__wrapper">
+                        <div className="tabs__list" ref={parentRef} onWheel={scrollHandler}>
+                            {Children.map(children, (child, index) =>
+                                cloneElement(child, { iconBefore, ...child.props, index })
+                            )}
+                        </div>
                     </div>
 
                     {isHorizontal && showArrows && (
-                        <Button
-                            className="tabs__nav_button"
-                            Icon={ChevronRight}
-                            size={size}
-                            appearance="secondary"
-                            displayType="text"
-                            ref={rightButtonRef}
-                            onClick={() => slideShift(true)}
-                        />
+                        <div className="tabs__nav_button">
+                            <Button
+                                className=""
+                                Icon={ChevronRight}
+                                size={size}
+                                appearance="secondary"
+                                displayType="text"
+                                ref={rightButtonRef}
+                                onClick={() => slideShift(true)}
+                            />
+                        </div>
                     )}
                 </div>
 

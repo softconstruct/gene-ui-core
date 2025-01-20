@@ -3,13 +3,19 @@
 
     display: flex;
     max-width: 100%;
-    overflow: hidden;
 
     &_horizontal {
         flex-direction: column;
 
-        #{ $this }__nav {
-            box-shadow: 0 calc(-1 * var(--guit-ref-border-width-thin)) 0 0 var(--guit-sem-color-border-neutral-2) inset;
+        #{ $this }__wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: -0.2rem;
+        }
+
+        #{ $this }__list {
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         &#{ $this }_line {
@@ -56,6 +62,14 @@
     }
 
     &_vertical {
+        height: 100%;
+        overflow: hidden;
+
+        #{ $this }__nav {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
         #{ $this }__nav,
         #{ $this }__list {
             flex-direction: column;
@@ -102,15 +116,15 @@
     }
 
     &__nav {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         flex: 0 0 auto;
         background-color: var(--guit-sem-color-background-neutral-1);
         max-width: 100%;
-        overflow: hidden;
 
         &_button {
             flex: 0 0 auto;
+            box-shadow: 0 calc(-1 * var(--guit-ref-border-width-thin)) 0 0 var(--guit-sem-color-border-neutral-2) inset;
 
             [dir="rtl"] & {
                 rotate: 180deg;
@@ -118,11 +132,16 @@
         }
     }
 
+    &__wrapper {
+        display: flex;
+        flex: 1;
+    }
+
     &__list {
         display: flex;
         flex: 1;
-        overflow-x: auto;
-        overflow-y: hidden;
+        box-sizing: border-box;
+        padding: 0.2rem;
         scroll-behavior: smooth;
 
         /* Hide scrollbar for Chrome, Safari and Opera */
