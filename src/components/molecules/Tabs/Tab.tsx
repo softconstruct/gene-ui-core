@@ -36,14 +36,13 @@ const Tab: FC<ITabProps> = ({
         }
     }, []);
 
-    console.log(isClosable);
-
     return (
+        // todo: add classnames to button for each case - "tabs__button_textOnly", "tabs__button_iconBefore", "tabs__button_iconOnly", ""
         <button
             type="button"
             role="tab"
             tabIndex={0}
-            className={classNames(`tabs__button  tabs__button_${size}`, size, {
+            className={classNames(`tabs__button  tabs__button_${size}`, {
                 tabs__button_selected: selectedTabIndex === index,
                 tabs__button_error: isError
             })}

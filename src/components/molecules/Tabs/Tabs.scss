@@ -10,7 +10,7 @@
         #{ $this }__wrapper {
             overflow: hidden;
             white-space: nowrap;
-            margin: -0.2rem;
+            margin: calc(-1 * var(--guit-ref-spacing-4xsmall));
         }
 
         #{ $this }__list {
@@ -22,7 +22,7 @@
             #{ $this }__button {
                 transition: transform 0.1s linear;
 
-                &_selected {
+                &_selected:not(&#{ $this }__button_error) {
                     box-shadow: 0 calc(-1 * var(--guit-ref-border-width-thick)) 0 0
                         var(--guit-sem-color-border-selected) inset;
                 }
@@ -36,7 +36,7 @@
 
         &#{ $this }_contained {
             #{ $this }__button {
-                &_selected {
+                &_selected:not(&#{ $this }__button_error) {
                     box-shadow:
                         0 var(--guit-ref-border-width-thick) 0 0 var(--guit-sem-color-border-selected) inset,
                         var(--guit-ref-border-width-thick) 0 0 0 var(--guit-sem-color-border-selected) inset,
@@ -141,7 +141,7 @@
         display: flex;
         flex: 1;
         box-sizing: border-box;
-        padding: 0.2rem;
+        padding: var(--guit-ref-spacing-4xsmall);
         scroll-behavior: smooth;
 
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -154,7 +154,7 @@
     }
 
     &__button {
-        $this: &;
+        $that: &;
 
         display: flex;
         align-items: center;
@@ -164,18 +164,48 @@
 
         &_large {
             height: var(--guit-sem-dimension-height-large);
-            padding-inline-start: var(--guit-ref-spacing-medium);
-            padding-inline-end: var(--guit-ref-spacing-large);
             padding-top: var(--guit-ref-spacing-xsmall);
             padding-bottom: var(--guit-ref-spacing-xsmall);
+
+            &#{ $that }_textOnly:not(&#{ $that }_error) {
+                padding-inline-start: var(--guit-ref-spacing-large);
+                padding-inline-end: var(--guit-ref-spacing-large);
+            }
+            &#{ $that }_iconBefore:not(&#{ $that }_error) {
+                padding-inline-start: var(--guit-ref-spacing-medium);
+                padding-inline-end: var(--guit-ref-spacing-large);
+            }
+            &#{ $that }_iconOnly {
+                padding-inline-start: var(--guit-ref-spacing-medium);
+                padding-inline-end: var(--guit-ref-spacing-medium);
+            }
+            &#{ $that }_error {
+                padding-inline-start: var(--guit-ref-spacing-medium);
+                padding-inline-end: var(--guit-ref-spacing-medium);
+            }
         }
 
         &_medium {
             height: var(--guit-sem-dimension-height-medium);
-            padding-inline-start: var(--guit-ref-spacing-xsmall);
-            padding-inline-end: var(--guit-ref-spacing-medium);
             padding-top: var(--guit-ref-spacing-3xsmall);
             padding-bottom: var(--guit-ref-spacing-3xsmall);
+
+            &#{ $that }_textOnly:not(&#{ $that }_error) {
+                padding-inline-start: var(--guit-ref-spacing-medium);
+                padding-inline-end: var(--guit-ref-spacing-medium);
+            }
+            &#{ $that }_iconBefore:not(&#{ $that }_error) {
+                padding-inline-start: var(--guit-ref-spacing-xsmall);
+                padding-inline-end: var(--guit-ref-spacing-medium);
+            }
+            &#{ $that }_iconOnly {
+                padding-inline-start: var(--guit-ref-spacing-xsmall);
+                padding-inline-end: var(--guit-ref-spacing-xsmall);
+            }
+            &#{ $that }_error {
+                padding-inline-start: var(--guit-ref-spacing-xsmall);
+                padding-inline-end: var(--guit-ref-spacing-xsmall);
+            }
         }
 
         &_text {
@@ -186,15 +216,15 @@
         }
 
         // state: rest
-        &:not(&#{ $this }_selected):not(&#{ $this }_disabled) {
+        &:not(&#{ $that }_selected):not(&#{ $that }_disabled) {
             cursor: pointer;
-            #{ $this }_icon {
+            #{ $that }_icon {
                 color: var(--guit-sem-color-foreground-neutral-2);
             }
         }
 
-        &:not(&#{ $this }_selected):not(&#{ $this }_disabled):not(&#{ $this }_error) {
-            #{ $this }_text {
+        &:not(&#{ $that }_selected):not(&#{ $that }_disabled):not(&#{ $that }_error) {
+            #{ $that }_text {
                 color: var(--guit-sem-color-foreground-neutral-2);
             }
         }
@@ -218,16 +248,16 @@
         &_selected {
             cursor: default;
 
-            #{ $this }_icon,
-            #{ $this }_text {
+            #{ $that }_icon,
+            #{ $that }_text {
                 color: var(--guit-sem-color-border-selected);
             }
         }
 
         // state: error
         &_error {
-            #{ $this }_iconError,
-            #{ $this }_text {
+            #{ $that }_iconError,
+            #{ $that }_text {
                 color: var(--guit-sem-color-foreground-error);
             }
         }
@@ -236,8 +266,8 @@
         &_disabled {
             pointer-events: none;
 
-            #{ $this }_icon,
-            #{ $this }_text {
+            #{ $that }_icon,
+            #{ $that }_text {
                 color: var(--guit-sem-color-foreground-disabled);
             }
         }

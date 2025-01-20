@@ -123,7 +123,7 @@ const Tabs: FC<ITabsProps> = ({
         return () => {
             cancelAnimationFrame(animationFrame);
         };
-    }, []);
+    }, [parentRef.current, isClosable]);
 
     const slideShift = (isLeft?: boolean) => {
         if (!parentRef.current || !leftButtonRef.current || !rightButtonRef.current) return;
@@ -157,19 +157,31 @@ const Tabs: FC<ITabsProps> = ({
 
     const scrollHandler = (e: React.WheelEvent<HTMLDivElement>) => {
         e.preventDefault();
-        if (rightButtonRef.current && leftButtonRef.current) {
-            rightButtonRef.current.disabled = false;
-            leftButtonRef.current.disabled = false;
-        }
+
         const delta = e.deltaY;
         swipedElements.current = Math.max(0, swipedElements.current + delta);
+
+        if (!rightButtonRef.current || !leftButtonRef.current || !parentRef.current) return;
+
+        if (swipedElements.current <= 0) {
+            leftButtonRef.current.disabled = true;
+            swipedElements.current = 0;
+        } else {
+            leftButtonRef.current.disabled = false;
+        }
+
+        if (swipedElements.current + parentRef.current.offsetWidth >= parentRef.current.scrollWidth) {
+            rightButtonRef.current.disabled = true;
+            swipedElements.current = parentRef.current.scrollWidth - parentRef.current.offsetWidth;
+        } else {
+            rightButtonRef.current.disabled = false;
+        }
     };
 
     const removeTabHandler = (index: number) => {
         const removedChildFromData = [...AllChildren];
         removedChildFromData.splice(index, 1);
         setAllChildren(removedChildFromData);
-
         if (!parentRef.current) return;
         setShowArrows(parentRef.current.scrollWidth > window.innerWidth);
     };
@@ -242,7 +254,7 @@ const Tabs: FC<ITabsProps> = ({
                     )}
                 </div>
 
-                <div className="tabs__stage">{(AllChildren[selectedTabIndex] as JSX.Element).props.children}</div>
+                <div className="tabs__stage">{(AllChildren[selectedTabIndex] as JSX.Element)?.props.children}</div>
             </div>
         </TabsContext.Provider>
     );
