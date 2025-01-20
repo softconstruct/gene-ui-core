@@ -1,12 +1,24 @@
-import React, { Children, cloneElement, FC, ReactElement, useEffect, useState } from "react";
+import React, {
+    Children,
+    cloneElement,
+    FC,
+    FunctionComponentElement,
+    ReactElement,
+    ReactNode,
+    useEffect,
+    useState
+} from "react";
 import classNames from "classnames";
 // Styles
 import "./Menu.scss";
+// import { IconProps } from "@geneui/icons";
 import Loader from "../../atoms/Loader";
+import { IMenuItemProps } from "./MenuItem";
 
-const stepBackArray = (arr) => arr.slice(0, -1);
+const stepBackArray = (arr: number[]) => arr.slice(0, -1);
 
-const findPathOfDefaultOpened = (menu, path = []) => {
+const findPathOfDefaultOpened = (menu: ReactNode | ReactElement[], path: number[] = []): number[] | null => {
+    if (!Array.isArray(menu)) return null;
     for (let i = 0; i < menu?.length; i++) {
         const item = menu[i];
 
@@ -31,16 +43,44 @@ interface IMenuProps {
      * This prop should be used to set placement properties for the element relative to its parent using BEM conventions.
      */
     className?: string;
-    children: ReactElement;
+    children: ReactElement | ReactElement[];
     isLoading?: boolean;
     onChange: (paths: number[], id: string | number) => void;
+}
+
+// interface IMenuData {
+//     title: string;
+//     selected?: boolean;
+//     id: number | string;
+//     value: string;
+//     IconBefore: FC<IconProps>;
+//     IconAfter: FC<IconProps>;
+//     danger?: boolean;
+//     defaultOpened?: never;
+//     isLoading?: boolean;
+//     disabled?: boolean;
+//     children: ReactNode | IMenuData[];
+// }
+
+export interface OnchangeHandlerType {
+    index: number;
+    id: number | string;
+    isBack?: boolean;
+    routeAction?: boolean;
 }
 
 /**
  * Menu component provides a list of options or actions available to the user within a specific context. Menus are used to offer additional functionality without cluttering the interface, allowing users to access commands, navigate to different sections, or modify settings quickly and efficiently.
  */
 
-const cloneChildrenRecursive = (children, onChangeHandler, paths, props, regardingPaths = [], isLoading = false) => {
+const cloneChildrenRecursive = (
+    children: React.JSX.Element | React.JSX.Element[],
+    onChangeHandler: (change: OnchangeHandlerType) => void,
+    paths: number[],
+    props = {},
+    regardingPaths: number[] = [],
+    isLoading = false
+): FunctionComponentElement<IMenuItemProps>[] | FunctionComponentElement<HTMLElement> => {
     if (isLoading) {
         return (
             <div className="menu__loader">
@@ -49,7 +89,16 @@ const cloneChildrenRecursive = (children, onChangeHandler, paths, props, regardi
         );
     }
 
+    if (Array.isArray(children) && !children.length) {
+        return (
+            <div className="menu__empty">
+                <h1>empty</h1>
+            </div>
+        );
+    }
+
     return Children.map(children, (child, i) => {
+        // if (!isValidElement(child)) return null;
         const isActive = paths?.length && i === paths[0];
 
         const childProps =
@@ -80,7 +129,7 @@ const cloneChildrenRecursive = (children, onChangeHandler, paths, props, regardi
 };
 
 const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
-    const [path, setPath] = useState([]);
+    const [path, setPath] = useState<number[]>([]);
 
     useEffect(() => {
         const defaultPath = findPathOfDefaultOpened(children);
@@ -89,7 +138,7 @@ const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
         }
     }, []);
 
-    const onChangeHandler = (index, id, isBack: boolean, routeAction: boolean) => {
+    const onChangeHandler = ({ index, id, isBack, routeAction }: OnchangeHandlerType) => {
         onChange(path, id);
         if (routeAction) {
             if (isBack) {
