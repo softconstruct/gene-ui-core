@@ -36,8 +36,6 @@ const Tab: FC<ITabProps> = ({
         }
     }, []);
 
-    console.log(isClosable);
-
     return (
         <button
             type="button"
