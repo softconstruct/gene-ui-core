@@ -71,6 +71,6 @@ describe("KeyValue ", () => {
     });
     it("renders space between key and value", () => {
         const wrapper = setup.setProps({ spaceBetween: true });
-        expect(wrapper.find(".keyValue_direction_horizontal_spaceBetween").exists()).toBeTruthy();
+        expect(wrapper.find(".keyValue_spaceBetween").exists()).toBeTruthy();
     });
 });
