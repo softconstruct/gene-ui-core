@@ -62,7 +62,7 @@ interface ITabsProps {
      */
     onChange?: (index: number) => void;
 
-    isClosable?: boolean;
+    closable?: boolean;
 }
 
 /**
@@ -86,7 +86,7 @@ const Tabs: FC<ITabsProps> = ({
     isLoading,
     className,
     onChange,
-    isClosable
+    closable
 }) => {
     const parentRef = useRef<HTMLDivElement | null>(null);
     const swipedElements = useRef<number>(0);
@@ -123,7 +123,7 @@ const Tabs: FC<ITabsProps> = ({
         return () => {
             cancelAnimationFrame(animationFrame);
         };
-    }, [parentRef.current, isClosable]);
+    }, [parentRef.current, closable]);
 
     const slideShift = (isLeft?: boolean) => {
         if (!parentRef.current || !leftButtonRef.current || !rightButtonRef.current) return;
@@ -231,7 +231,7 @@ const Tabs: FC<ITabsProps> = ({
                             {Children.map(AllChildren, (child, index) =>
                                 cloneElement(child as JSX.Element, {
                                     iconBefore,
-                                    isClosable,
+                                    closable,
                                     ...(child as JSX.Element).props,
                                     index
                                 })

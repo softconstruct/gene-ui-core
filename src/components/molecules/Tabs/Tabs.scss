@@ -171,7 +171,7 @@
                 padding-inline-start: var(--guit-ref-spacing-large);
                 padding-inline-end: var(--guit-ref-spacing-large);
             }
-            &#{ $that }_iconBefore:not(&#{ $that }_error) {
+            &#{ $that }_icon:not(&#{ $that }_error) {
                 padding-inline-start: var(--guit-ref-spacing-medium);
                 padding-inline-end: var(--guit-ref-spacing-large);
             }
@@ -194,7 +194,7 @@
                 padding-inline-start: var(--guit-ref-spacing-medium);
                 padding-inline-end: var(--guit-ref-spacing-medium);
             }
-            &#{ $that }_iconBefore:not(&#{ $that }_error) {
+            &#{ $that }_icon:not(&#{ $that }_error) {
                 padding-inline-start: var(--guit-ref-spacing-xsmall);
                 padding-inline-end: var(--guit-ref-spacing-medium);
             }

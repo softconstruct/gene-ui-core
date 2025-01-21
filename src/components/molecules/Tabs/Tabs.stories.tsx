@@ -2,6 +2,7 @@ import React, { FC, FunctionComponent } from "react";
 import { Meta } from "@storybook/react";
 
 // Helpers
+import { TagOutline } from "@geneui/icons";
 import { args, propCategory } from "../../../../stories/assets/storybook.globals";
 
 // Components
@@ -12,7 +13,6 @@ const meta: Meta<typeof Tabs> = {
     component: Tabs,
     argTypes: {
         isLoading: args({ control: "boolean", ...propCategory.states }),
-
         className: args({ control: "false", ...propCategory.appearance }),
         iconBefore: args({ control: "boolean", ...propCategory.appearance }),
         size: args({ control: "select", ...propCategory.appearance }),
@@ -33,9 +33,7 @@ const Template: FC<ITabsProps> = (props) => {
     return (
         <Tabs {...props}>
             {new Array(25).fill(null).map((_, i) => (
-                <Tab title={i + 1} iconBefore={false}>
-                    tab {i + 1}
-                </Tab>
+                <Tab title={`TAB ${i + 1}`}>tab {i + 1}</Tab>
             ))}
         </Tabs>
     );
@@ -48,7 +46,7 @@ export const IconOnly: FC<ITabsProps> = (props) => {
     return (
         <Tabs {...props}>
             {new Array(25).fill(null).map((_, i) => (
-                <Tab iconBefore={false}>tab {i + 1} </Tab>
+                <Tab Icon={TagOutline}>tab {i + 1} </Tab>
             ))}
         </Tabs>
     );
@@ -58,7 +56,7 @@ export const TextOnly: FC<ITabsProps> = (props) => {
     return (
         <Tabs {...props}>
             {new Array(25).fill(null).map((_, i) => (
-                <Tab iconBefore={false} title={`tab${i + 1}`} Icon={null}>
+                <Tab title={`tab${i + 1}`} Icon={null}>
                     tab {i + 1}
                 </Tab>
             ))}

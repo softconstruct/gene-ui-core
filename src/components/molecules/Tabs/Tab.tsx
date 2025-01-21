@@ -1,29 +1,20 @@
 import React, { FC, useContext, useEffect, PropsWithChildren } from "react";
 
-import { IconProps, TagOutline, Close } from "@geneui/icons";
+import { IconProps, Close, InfoFill } from "@geneui/icons";
 import classNames from "classnames";
 import { TabsContext } from "./Tabs";
 import Button from "../../atoms/Button";
 
 export interface ITabProps extends PropsWithChildren {
     title?: string | number;
-    iconBefore?: boolean;
     Icon?: FC<IconProps> | null;
     defaultSelected?: boolean;
     isError?: boolean;
     index?: number;
-    isClosable?: boolean;
+    closable?: boolean;
 }
 
-const Tab: FC<ITabProps> = ({
-    title,
-    Icon = TagOutline,
-    iconBefore = true,
-    defaultSelected,
-    isError,
-    index,
-    isClosable
-}) => {
+const Tab: FC<ITabProps> = ({ title, Icon, defaultSelected, isError, index, closable }) => {
     const { getIndex, size, selectedTabIndex, removeTabHandler } = useContext(TabsContext);
 
     const provideChildren = () => {
@@ -37,21 +28,22 @@ const Tab: FC<ITabProps> = ({
     }, []);
 
     return (
-        // todo: add classnames to button for each case - "tabs__button_textOnly", "tabs__button_iconBefore", "tabs__button_iconOnly", ""
         <button
             type="button"
             role="tab"
             tabIndex={0}
             className={classNames(`tabs__button  tabs__button_${size}`, {
                 tabs__button_selected: selectedTabIndex === index,
-                tabs__button_error: isError
+                tabs__button_error: isError,
+                tabs__button_textOnly: !Icon,
+                tabs__button_icon: Icon && title,
+                tabs__button_iconOnly: !title
             })}
             onClick={provideChildren}
         >
-            {iconBefore && Icon && <Icon className="tabs__button_icon" size={24} />}
+            {!isError && Icon && <Icon className="tabs__button_icon" size={24} />}
             {title && <span className="tabs__button_text"> {title}</span>}
-            {!iconBefore && Icon && <Icon className="tabs__button_icon" size={24} />}
-            {isClosable && (
+            {closable && (
                 <Button
                     displayType="text"
                     appearance="secondary"
@@ -64,6 +56,7 @@ const Tab: FC<ITabProps> = ({
                     Icon={Close}
                 />
             )}
+            {isError && <InfoFill className="tabs__button_iconError" size={24} />}
         </button>
     );
 };
