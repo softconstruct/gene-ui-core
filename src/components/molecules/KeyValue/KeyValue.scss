@@ -10,7 +10,9 @@
         }
 
         &_horizontal {
-            width: 100%;
+            &_spaceBetween {
+                width: 100%;
+            }
         }
     }
 
