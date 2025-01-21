@@ -51,8 +51,15 @@
         }
 
         #{ $this }__button {
-            border-top-left-radius: var(--guit-ref-radius-2xsmall);
-            border-top-right-radius: var(--guit-ref-radius-2xsmall);
+            &_large {
+                border-top-left-radius: var(--guit-ref-radius-2xsmall);
+                border-top-right-radius: var(--guit-ref-radius-2xsmall);
+            }
+
+            &_medium {
+                border-top-left-radius: var(--guit-ref-radius-3xsmall);
+                border-top-right-radius: var(--guit-ref-radius-3xsmall);
+            }
 
             &:not(&#{ $this }__button_selected):not(&#{ $this }__button_error) {
                 box-shadow: 0 calc(-1 * var(--guit-ref-border-width-thin)) 0 0 var(--guit-sem-color-border-neutral-2)
@@ -77,8 +84,15 @@
 
         #{ $this }__button {
             [dir="ltr"] & {
-                border-top-left-radius: var(--guit-ref-radius-2xsmall);
-                border-bottom-left-radius: var(--guit-ref-radius-2xsmall);
+                &_large {
+                    border-top-left-radius: var(--guit-ref-radius-2xsmall);
+                    border-bottom-left-radius: var(--guit-ref-radius-2xsmall);
+                }
+
+                &_medium {
+                    border-top-left-radius: var(--guit-ref-radius-3xsmall);
+                    border-bottom-left-radius: var(--guit-ref-radius-3xsmall);
+                }
 
                 &:not(&#{ $this }__button_selected):not(&#{ $this }__button_error) {
                     box-shadow: calc(-1 * var(--guit-ref-border-width-thin)) 0 0 0
@@ -97,8 +111,15 @@
             }
 
             [dir="rtl"] & {
-                border-top-right-radius: var(--guit-ref-radius-2xsmall);
-                border-bottom-right-radius: var(--guit-ref-radius-2xsmall);
+                &_large {
+                    border-top-right-radius: var(--guit-ref-radius-2xsmall);
+                    border-bottom-right-radius: var(--guit-ref-radius-2xsmall);
+                }
+
+                &_medium {
+                    border-top-right-radius: var(--guit-ref-radius-3xsmall);
+                    border-bottom-right-radius: var(--guit-ref-radius-3xsmall);
+                }
 
                 &:not(&#{ $this }__button_selected):not(&#{ $this }__button_error) {
                     box-shadow: var(--guit-ref-border-width-thin) 0 0 0 var(--guit-sem-color-border-neutral-2) inset;
