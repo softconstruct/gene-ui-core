@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import classNames from "classnames";
 // Styles
 import "./Profile.scss";
+import { CaretDown } from "@geneui/icons";
+import Avatar from "../../atoms/Avatar";
 
 interface IProfileProps {
     /**
@@ -16,7 +18,16 @@ interface IProfileProps {
  * Profile component provides users with access to quick actions, including links to settings, personal preferences, and other utility functions such.
  */
 const Profile: FC<IProfileProps> = ({ className }) => {
-    return <div className={classNames("profile", className)}>Profile</div>;
+    return (
+        <div className={classNames("profile", className)}>
+            {/* Add tabindex for profile */}
+            <Avatar className="profile__avatar" />
+            <div className="profile__content">
+                <span className="profile__text">@username</span>
+                <CaretDown className="profile__icon" size={20} />
+            </div>
+        </div>
+    );
 };
 
 export { IProfileProps, Profile as default };
