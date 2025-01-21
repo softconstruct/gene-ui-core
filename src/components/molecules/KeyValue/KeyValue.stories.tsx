@@ -20,12 +20,14 @@ const meta: Meta<typeof KeyValue> = {
         className: args({ control: false, ...propCategory.appearance }),
         direction: args({ control: "select", ...propCategory.appearance }),
         size: args({ control: "select", ...propCategory.appearance }),
+        spaceBetween: args({ control: "boolean", ...propCategory.appearance }),
         children: args({ control: false, ...propCategory.content })
     },
     args: {
         direction: "vertical",
         size: "medium",
-        children: [key, <Value>Description</Value>]
+        children: [key, <Value>Description</Value>],
+        spaceBetween: false
     } as IKeyValueProps
 };
 

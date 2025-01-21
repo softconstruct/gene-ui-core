@@ -25,6 +25,10 @@ interface IKeyValueProps {
      * Possible values: `medium | large`;
      */
     size?: "medium" | "large";
+    /**
+     * Adds space between key and value in horizontal direction.
+     */
+    spaceBetween?: boolean;
     children: [ReactElement<IKeyProps>, ReactElement<IValueProps>];
 }
 
@@ -53,10 +57,15 @@ const KeyValue: FC<IKeyValueProps> = ({
     className,
     direction = "vertical",
     size = "medium",
-    children: [key, value]
+    children: [key, value],
+    spaceBetween
 }) => {
     return (
-        <div className={classNames(`keyValue keyValue_direction_${direction} keyValue_size_${size}`, className)}>
+        <div
+            className={classNames(`keyValue keyValue_direction_${direction} keyValue_size_${size}`, className, {
+                keyValue_direction_horizontal_spaceBetween: spaceBetween
+            })}
+        >
             {elementWithType(key, "Key", size)}
             {elementWithType(value, "Value", size)}
         </div>
