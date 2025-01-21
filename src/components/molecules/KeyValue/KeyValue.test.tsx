@@ -69,4 +69,8 @@ describe("KeyValue ", () => {
         const wrapper = setup.setProps({ direction });
         expect(wrapper.find(".keyValue").hasClass(`keyValue_direction_${direction}`)).toBeTruthy();
     });
+    it("renders space between key and value", () => {
+        const wrapper = setup.setProps({ spaceBetween: true });
+        expect(wrapper.find(".keyValue_direction_horizontal_spaceBetween").exists()).toBeTruthy();
+    });
 });
