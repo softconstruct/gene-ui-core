@@ -63,7 +63,7 @@ const KeyValue: FC<IKeyValueProps> = ({
     return (
         <div
             className={classNames(`keyValue keyValue_direction_${direction} keyValue_size_${size}`, className, {
-                keyValue_direction_horizontal_spaceBetween: spaceBetween
+                keyValue_spaceBetween: spaceBetween
             })}
         >
             {elementWithType(key, "Key", size)}

@@ -10,7 +10,7 @@
         }
 
         &_horizontal {
-            &_spaceBetween {
+            &#{ $this }_spaceBetween {
                 width: 100%;
             }
         }
