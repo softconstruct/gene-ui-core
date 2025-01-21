@@ -1,14 +1,10 @@
-.splitButtonTestHolder {
-    display: inline-grid;
-    grid-template-rows: repeat(2, auto);
-    grid-auto-flow: column;
-    gap: 1rem;
-}
-
-// todo should remove splitButtonTestHolder later
-
 .splitButton {
+    position: relative;
     display: inline-flex;
+
+    &__content {
+        display: flex;
+    }
 
     &__button {
         $this: &;
@@ -17,7 +13,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        border-width: var(--guit-ref-border-width-thin);
+        border-style: var(--guit-ref-border-style-solid);
         cursor: pointer;
+        user-select: none;
 
         &:first-child:not(:only-child) {
             border-inline-end-width: 0;
@@ -30,8 +29,6 @@
                 bottom: -0.1rem;
                 inset-inline-end: 0;
                 width: 0.1rem;
-
-                //height: 100%;
                 z-index: 10;
                 pointer-events: none;
             }
@@ -81,6 +78,7 @@
                 }
 
                 &#{ $this }_icon_only {
+                    width: var(--guit-sem-dimension-width-large);
                     padding: var(--guit-ref-spacing-small);
                 }
             }
@@ -124,6 +122,7 @@
                 }
 
                 &#{ $this }_icon_only {
+                    width: var(--guit-sem-dimension-width-medium);
                     padding: var(--guit-ref-spacing-2xsmall);
                 }
             }
@@ -167,58 +166,49 @@
                 }
 
                 &#{ $this }_icon_only {
+                    width: var(--guit-sem-dimension-width-small);
                     padding: var(--guit-ref-spacing-4xsmall);
                 }
             }
         }
 
         &_color {
-            &_primary,
-            &_secondary,
-            &_inverse {
-                border-width: var(--guit-ref-border-width-thin);
-                border-style: var(--guit-ref-border-style-solid);
-                &#{ $this }_type {
-                    //&_outline {
-                    //    border-width: var(--guit-ref-border-width-thin);
-                    //    border-style: var(--guit-ref-border-style-solid);
-                    //}
-                }
-            }
-
             &_primary {
                 &#{ $this }_type {
                     &_fill {
+                        border-color: transparent;
+                        background-color: var(--guit-sem-color-background-brand-2);
+                        color: var(--guit-sem-color-foreground-inverse);
+
                         &#{ $this }:after {
                             background-color: var(--guit-sem-color-border-inverse);
                         }
 
-                        border-color: var(--guit-sem-color-background-brand-2);
-                        background-color: var(--guit-sem-color-background-brand-2);
-                        color: var(--guit-sem-color-foreground-inverse);
-
                         &:hover {
                             background-color: var(--guit-sem-color-background-brand-2-hover);
-                            border-color: var(--guit-sem-color-background-brand-2-hover);
                         }
 
                         &:active {
                             background-color: var(--guit-sem-color-background-brand-2-pressed);
-                            border-color: var(--guit-sem-color-background-brand-2-pressed);
                         }
 
                         &:disabled {
                             background-color: var(--guit-sem-color-background-disabled);
+                            color: var(--guit-sem-color-foreground-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-disabled-2);
+                            }
                         }
                     }
 
                     &_outline {
+                        border-color: var(--guit-sem-color-border-brand);
+                        color: var(--guit-sem-color-foreground-brand);
+
                         &#{ $this }:after {
                             background-color: var(--guit-sem-color-border-brand);
                         }
-
-                        border-color: var(--guit-sem-color-border-brand);
-                        color: var(--guit-sem-color-foreground-brand);
 
                         &:hover {
                             background-color: var(--guit-sem-color-background-brand-1-hover);
@@ -230,6 +220,11 @@
 
                         &:disabled {
                             border-color: var(--guit-sem-color-border-disabled-1);
+                            color: var(--guit-sem-color-foreground-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-disabled-1);
+                            }
                         }
                     }
                 }
@@ -238,35 +233,40 @@
             &_secondary {
                 &#{ $this }_type {
                     &_fill {
+                        border-color: transparent;
+                        background-color: var(--guit-sem-color-background-neutral-3);
+                        color: var(--guit-sem-color-foreground-neutral-2);
+
                         &#{ $this }:after {
                             background-color: var(--guit-sem-color-border-neutral-2);
                         }
 
-                        border-color: var(--guit-sem-color-border-neutral-2);
-                        background-color: var(--guit-sem-color-background-neutral-2);
-                        color: var(--guit-sem-color-foreground-neutral-2);
-
                         &:hover {
-                            background-color: var(--guit-sem-color-background-neutral-2-hover);
+                            background-color: var(--guit-sem-color-background-neutral-3-hover);
                         }
 
                         &:active {
-                            background-color: var(--guit-sem-color-background-neutral-2-pressed);
+                            background-color: var(--guit-sem-color-background-neutral-3-pressed);
                         }
 
                         &:disabled {
                             background-color: var(--guit-sem-color-background-disabled);
+                            color: var(--guit-sem-color-foreground-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-disabled-2);
+                            }
                         }
                     }
 
                     &_outline {
-                        &#{ $this }:after {
-                            background-color: var(--guit-sem-color-border-neutral-2);
-                        }
-
                         background-color: var(--guit-sem-color-background-transparent-1);
                         border-color: var(--guit-sem-color-border-neutral-2);
                         color: var(--guit-sem-color-foreground-neutral-2);
+
+                        &#{ $this }:after {
+                            background-color: var(--guit-sem-color-border-neutral-2);
+                        }
 
                         &:hover {
                             background-color: var(--guit-sem-color-background-transparent-1-hover);
@@ -278,6 +278,11 @@
 
                         &:disabled {
                             border-color: var(--guit-sem-color-border-disabled-1);
+                            color: var(--guit-sem-color-foreground-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-disabled-1);
+                            }
                         }
                     }
                 }
@@ -286,13 +291,13 @@
             &_inverse {
                 &#{ $this }_type {
                     &_fill {
-                        &#{ $this }:after {
-                            background-color: var(--guit-sem-color-border-neutral-2);
-                        }
-
                         border-color: transparent;
                         background-color: var(--guit-sem-color-background-inverse);
                         color: var(--guit-sem-color-foreground-neutral-2);
+
+                        &#{ $this }:after {
+                            background-color: var(--guit-sem-color-border-neutral-2);
+                        }
 
                         &:hover {
                             background-color: var(--guit-sem-color-background-inverse-hover);
@@ -304,17 +309,22 @@
 
                         &:disabled {
                             background-color: var(--guit-sem-color-background-disabled);
+                            color: var(--guit-sem-color-foreground-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-inverse-disabled);
+                            }
                         }
                     }
 
                     &_outline {
-                        &#{ $this }:after {
-                            background-color: var(--guit-sem-color-border-inverse);
-                        }
-
                         background-color: var(--guit-sem-color-background-transparent-1);
                         border-color: var(--guit-sem-color-border-inverse);
                         color: var(--guit-sem-color-foreground-inverse);
+
+                        &#{ $this }:after {
+                            background-color: var(--guit-sem-color-border-inverse);
+                        }
 
                         &:hover {
                             background-color: var(--guit-sem-color-background-transparent-1-hover);
@@ -327,6 +337,10 @@
                         &:disabled {
                             border-color: var(--guit-sem-color-border-inverse-disabled);
                             color: var(--guit-sem-color-foreground-inverse-disabled);
+
+                            &#{ $this }:after {
+                                background-color: var(--guit-sem-color-border-inverse-disabled);
+                            }
                         }
                     }
                 }
@@ -335,19 +349,11 @@
 
         &:focus-visible {
             z-index: 1;
-            outline-offset: var(--guit-ref-border-width-thin);
-            outline: var(--guit-ref-border-width-thin) var(--guit-ref-border-style-solid)
-                var(--guit-sem-color-border-focus);
         }
 
-        &:disabled,
-        &.disabled {
+        &:disabled {
             pointer-events: none;
-
-            #{ $this }__text,
-            #{ $this }__icon {
-                color: var(--guit-sem-color-foreground-disabled);
-            }
+            user-select: none;
         }
     }
 
