@@ -37,6 +37,9 @@ const MenuItemRecursion = (menuData) => {
                 disabled={el.disabled}
                 isLoading={el.isLoading}
                 id={el.id}
+                divider={el.divider}
+                loadingText={el.loadingText}
+                emptyText={el.emptyText}
             >
                 {el.children ? MenuItemRecursion(el.children) : el.title}
             </MenuItem>

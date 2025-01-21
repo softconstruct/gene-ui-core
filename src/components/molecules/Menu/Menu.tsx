@@ -15,8 +15,6 @@ import "./Menu.scss";
 import Loader from "../../atoms/Loader";
 import { IMenuItemProps } from "./MenuItem";
 
-const stepBackArray = (arr: number[]) => arr.slice(0, -1);
-
 const findPathOfDefaultOpened = (menu: ReactNode | ReactElement[], path: number[] = []): number[] | null => {
     if (!Array.isArray(menu)) return null;
     for (let i = 0; i < menu?.length; i++) {
@@ -46,6 +44,7 @@ interface IMenuProps {
     children: ReactElement | ReactElement[];
     isLoading?: boolean;
     onChange: (paths: number[], id: string | number) => void;
+    loadingText?: string;
 }
 
 // interface IMenuData {
@@ -79,12 +78,14 @@ const cloneChildrenRecursive = (
     paths: number[],
     props = {},
     regardingPaths: number[] = [],
-    isLoading = false
+    isLoading = false,
+    loadingText = "",
+    emptyText = ""
 ): FunctionComponentElement<IMenuItemProps>[] | FunctionComponentElement<HTMLElement> => {
     if (isLoading) {
         return (
             <div className="menu__loader">
-                <Loader />
+                <Loader text={loadingText} textPosition="below" />
             </div>
         );
     }
@@ -92,13 +93,12 @@ const cloneChildrenRecursive = (
     if (Array.isArray(children) && !children.length) {
         return (
             <div className="menu__empty">
-                <h1>empty</h1>
+                <h1>{emptyText}</h1>
             </div>
         );
     }
 
     return Children.map(children, (child, i) => {
-        // if (!isValidElement(child)) return null;
         const isActive = paths?.length && i === paths[0];
 
         const childProps =
@@ -112,7 +112,9 @@ const cloneChildrenRecursive = (
                           paths.slice(1),
                           props,
                           [...regardingPaths, i],
-                          child.props.isLoading
+                          child.props.isLoading,
+                          child.props.loadingText,
+                          child.props.emptyText
                       )
                   }
                 : props;
@@ -123,12 +125,11 @@ const cloneChildrenRecursive = (
             ...childProps,
             onChangeHandler,
             regardingPaths
-            // index: i
         });
     });
 };
 
-const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
+const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading, loadingText }) => {
     const [path, setPath] = useState<number[]>([]);
 
     useEffect(() => {
@@ -142,7 +143,7 @@ const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
         onChange(path, id);
         if (routeAction) {
             if (isBack) {
-                const newSteps = stepBackArray(path);
+                const newSteps = path.slice(0, -1);
                 onChange(newSteps, id);
                 setPath(newSteps);
             } else {
@@ -163,7 +164,7 @@ const Menu: FC<IMenuProps> = ({ className, onChange, children, isLoading }) => {
                     <div className="menu__content">
                         {isLoading ? (
                             <div className="menu__loader">
-                                <Loader />
+                                <Loader text={loadingText} textPosition="below" />
                             </div>
                         ) : (
                             clonedChildren

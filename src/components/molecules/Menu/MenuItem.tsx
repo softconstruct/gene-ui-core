@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from "react";
 import { CheckMark, ChevronLeft, ChevronRight, IconProps } from "@geneui/icons";
 import classNames from "classnames";
 import { OnchangeHandlerType } from "./Menu";
+import Divider from "../../atoms/Divider";
 
 interface IMenuItemProps {
     selected?: boolean;
@@ -17,6 +18,9 @@ interface IMenuItemProps {
     danger?: boolean;
     disabled?: boolean;
     id: number | string;
+    divider?: boolean;
+    loadingText?: string;
+    emptyText?: string;
 }
 
 const MenuItem: FC<IMenuItemProps> = ({
@@ -30,7 +34,8 @@ const MenuItem: FC<IMenuItemProps> = ({
     IconAfter,
     danger,
     disabled,
-    id
+    id,
+    divider
 }) => {
     return (
         <>
@@ -56,6 +61,7 @@ const MenuItem: FC<IMenuItemProps> = ({
                         </span>
                         <ChevronRight className="menu__icon menu__icon_after" size={20} />
                     </button>
+                    {divider && <Divider />}
                     {/* menu list wrapper */}
                     <div
                         className={classNames("menu__list  ", {
@@ -81,27 +87,30 @@ const MenuItem: FC<IMenuItemProps> = ({
                 </>
             ) : (
                 // Simple menu item
-                <button
-                    type="button"
-                    className={classNames("menu__item", {
-                        menu__item_danger: danger,
-                        menu__item_selected: selected,
-                        menu__item_disabled: disabled
-                    })}
-                    onClick={() => {
-                        if (onChangeHandler) {
-                            onChangeHandler({ index, id, isBack: false, routeAction: false });
-                        }
-                    }}
-                    {...(disabled ? { tabIndex: -1 } : {})}
-                >
-                    <span className="menu__cell">
-                        {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
-                        <span className="menu__itemTitle">{children}</span>
-                    </span>
-                    {(selected && <CheckMark className="menu__icon menu__icon_after" size={20} />) ||
-                        (IconAfter && <IconAfter className="menu__icon menu__icon_after" size={20} />)}
-                </button>
+                <>
+                    <button
+                        type="button"
+                        className={classNames("menu__item", {
+                            menu__item_danger: danger,
+                            menu__item_selected: selected,
+                            menu__item_disabled: disabled
+                        })}
+                        onClick={() => {
+                            if (onChangeHandler) {
+                                onChangeHandler({ index, id, isBack: false, routeAction: false });
+                            }
+                        }}
+                        {...(disabled ? { tabIndex: -1 } : {})}
+                    >
+                        <span className="menu__cell">
+                            {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
+                            <span className="menu__itemTitle">{children}</span>
+                        </span>
+                        {(selected && <CheckMark className="menu__icon menu__icon_after" size={20} />) ||
+                            (IconAfter && <IconAfter className="menu__icon menu__icon_after" size={20} />)}
+                    </button>
+                    {divider && <Divider />}
+                </>
             )}
         </>
     );
