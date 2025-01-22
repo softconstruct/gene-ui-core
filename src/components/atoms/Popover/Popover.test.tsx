@@ -65,7 +65,7 @@ describe("Popover", () => {
                 </PopoverFooter>
             )
         });
-        expect(provider().find(Button).first().props().children).toBe({ child });
+        expect(provider().find(Button).first().props().children).toBe(child);
     });
 
     it("renders withArrow prop correct", () => {
