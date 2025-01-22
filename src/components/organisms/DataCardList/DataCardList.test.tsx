@@ -2,12 +2,14 @@ import React from "react";
 import { ReactWrapper, mount } from "enzyme";
 
 // Components
-import DataCard, { IDataCardProps } from "./index";
+import DataCardList, { IDataCardListProps } from "./index";
 
-describe("Datacard ", () => {
-    let setup: ReactWrapper<IDataCardProps>;
+const data: IDataCardListProps["data"] = [[{ key: "test", value: { text: "Description", type: "pill" } }]];
+
+describe("DataCard ", () => {
+    let setup: ReactWrapper<IDataCardListProps>;
     beforeEach(() => {
-        setup = mount(<DataCard />);
+        setup = mount(<DataCardList data={data} />);
     });
 
     it("renders without crashing", () => {
@@ -20,6 +22,4 @@ describe("Datacard ", () => {
 
         expect(wrapper.hasClass(className)).toBeTruthy();
     });
-
-    // Your tests here
 });
