@@ -40,6 +40,7 @@ const MenuItemRecursion = (menuData) => {
                 divider={el.divider}
                 loadingText={el.loadingText}
                 emptyText={el.emptyText}
+                ComponentRender={el.ComponentRender}
             >
                 {el.children ? MenuItemRecursion(el.children) : el.title}
             </MenuItem>

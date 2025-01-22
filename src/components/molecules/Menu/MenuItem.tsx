@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { CheckMark, ChevronLeft, ChevronRight, IconProps } from "@geneui/icons";
 import classNames from "classnames";
+import { isValidElementType } from "react-is";
 import { OnchangeHandlerType } from "./Menu";
 import Divider from "../../atoms/Divider";
 
@@ -21,6 +22,7 @@ interface IMenuItemProps {
     divider?: boolean;
     loadingText?: string;
     emptyText?: string;
+    ComponentRender?: FC;
 }
 
 const MenuItem: FC<IMenuItemProps> = ({
@@ -35,8 +37,14 @@ const MenuItem: FC<IMenuItemProps> = ({
     danger,
     disabled,
     id,
-    divider
+    divider,
+    ComponentRender
 }) => {
+    const customElement = isValidElementType(ComponentRender) && (
+        <div className="menu__item_custom">
+            <ComponentRender />
+        </div>
+    );
     return (
         <>
             {typeof children !== "string" ? (
@@ -59,6 +67,7 @@ const MenuItem: FC<IMenuItemProps> = ({
                             {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
                             <span className="menu__itemTitle">{title}</span>
                         </span>
+
                         <ChevronRight className="menu__icon menu__icon_after" size={20} />
                     </button>
                     {divider && <Divider />}
@@ -88,27 +97,29 @@ const MenuItem: FC<IMenuItemProps> = ({
             ) : (
                 // Simple menu item
                 <>
-                    <button
-                        type="button"
-                        className={classNames("menu__item", {
-                            menu__item_danger: danger,
-                            menu__item_selected: selected,
-                            menu__item_disabled: disabled
-                        })}
-                        onClick={() => {
-                            if (onChangeHandler) {
-                                onChangeHandler({ index, id, isBack: false, routeAction: false });
-                            }
-                        }}
-                        {...(disabled ? { tabIndex: -1 } : {})}
-                    >
-                        <span className="menu__cell">
-                            {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
-                            <span className="menu__itemTitle">{children}</span>
-                        </span>
-                        {(selected && <CheckMark className="menu__icon menu__icon_after" size={20} />) ||
-                            (IconAfter && <IconAfter className="menu__icon menu__icon_after" size={20} />)}
-                    </button>
+                    {customElement || (
+                        <button
+                            type="button"
+                            className={classNames("menu__item", {
+                                menu__item_danger: danger,
+                                menu__item_selected: selected,
+                                menu__item_disabled: disabled
+                            })}
+                            onClick={() => {
+                                if (onChangeHandler) {
+                                    onChangeHandler({ index, id, isBack: false, routeAction: false });
+                                }
+                            }}
+                            {...(disabled ? { tabIndex: -1 } : {})}
+                        >
+                            <span className="menu__cell">
+                                {IconBefore && <IconBefore className="menu__icon menu__icon_before" size={20} />}
+                                <span className="menu__itemTitle">{children}</span>
+                            </span>
+                            {(selected && <CheckMark className="menu__icon menu__icon_after" size={20} />) ||
+                                (IconAfter && <IconAfter className="menu__icon menu__icon_after" size={20} />)}
+                        </button>
+                    )}
                     {divider && <Divider />}
                 </>
             )}
