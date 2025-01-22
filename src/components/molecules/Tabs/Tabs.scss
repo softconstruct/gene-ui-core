@@ -38,9 +38,9 @@
             #{ $this }__button {
                 &_selected:not(&#{ $this }__button_error) {
                     box-shadow:
-                        0 var(--guit-ref-border-width-thick) 0 0 var(--guit-sem-color-border-selected) inset,
-                        var(--guit-ref-border-width-thick) 0 0 0 var(--guit-sem-color-border-selected) inset,
-                        calc(-1 * var(--guit-ref-border-width-thick)) 0 0 0 var(--guit-sem-color-border-selected) inset;
+                        0 var(--guit-ref-border-width-thin) 0 0 var(--guit-sem-color-border-selected) inset,
+                        var(--guit-ref-border-width-thin) 0 0 0 var(--guit-sem-color-border-selected) inset,
+                        calc(-1 * var(--guit-ref-border-width-thin)) 0 0 0 var(--guit-sem-color-border-selected) inset;
                 }
 
                 &_error {
@@ -251,7 +251,7 @@
         }
 
         // state: hover
-        &:hover {
+        &:hover:not(&#{ $that }_selected):not(&#{ $that }_disabled) {
             background-color: var(--guit-sem-color-background-neutral-1-hover);
         }
 
