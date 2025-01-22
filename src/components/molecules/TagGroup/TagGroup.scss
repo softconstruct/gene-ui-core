@@ -1,5 +1,32 @@
 .tagGroup {
-    // Your styles here
-    color: var(--guit-ref-color-magenta-500base);
-    font-size: var(--guit-sem-font-caption-large-medium-font-size);
+    $this: &;
+
+    display: grid;
+    grid-gap: var(--guit-ref-spacing-xsmall);
+
+    &_extended {
+        grid-template-rows: 1fr 1fr;
+        height: unset;
+    }
+
+    &:not(#{ $this }_extended) {
+        grid-template-rows: auto 1fr;
+        height: 100%;
+    }
+
+    &__container {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--guit-ref-spacing-xsmall);
+    }
+
+    &__showButton {
+        justify-self: end;
+    }
 }
