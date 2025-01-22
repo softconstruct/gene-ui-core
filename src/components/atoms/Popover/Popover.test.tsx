@@ -5,6 +5,8 @@ import { ReactWrapper, mount } from "enzyme";
 import Popover, { IPopoverProps } from "./index";
 import GeneUIProvider from "../../providers/GeneUIProvider";
 import Button from "../Button";
+import PopoverFooter from "./PopoverFooter";
+import PopoverFooterActions from "./PopoverFooterActions";
 
 describe("Popover", () => {
     let setup: ReactWrapper<IPopoverProps>;
@@ -51,28 +53,19 @@ describe("Popover", () => {
         expect(provider().find(`.popover_size_${size}`).exists()).toBeTruthy();
     });
 
-    it("renders primaryButton prop correct", () => {
+    it("renders PopoverFooterActions child correct", () => {
+        const child = "test";
         setup.setProps({
             alwaysShow: true,
-            primaryButton: {
-                title: "test",
-                onClick: () => {}
-            }
+            children: (
+                <PopoverFooter>
+                    <PopoverFooterActions>
+                        <Button onClick={() => {}}>{child}</Button>
+                    </PopoverFooterActions>
+                </PopoverFooter>
+            )
         });
-        expect(provider().find(Button).props().appearance).toBe("primary");
-        expect(provider().find(Button).props().title).toBe("test");
-    });
-    it("renders secondaryButton prop correct", () => {
-        setup.setProps({
-            alwaysShow: true,
-            primaryButton: { title: "test", onClick: () => {} },
-            secondaryButton: {
-                title: "test",
-                onClick: () => {}
-            }
-        });
-        expect(provider().find(Button).first().props().appearance).toBe("inverse");
-        expect(provider().find(Button).first().props().title).toBe("test");
+        expect(provider().find(Button).first().props().children).toBe({ child });
     });
 
     it("renders withArrow prop correct", () => {
@@ -80,23 +73,6 @@ describe("Popover", () => {
             withArrow: true,
             alwaysShow: true
         });
-
         expect(provider().find(".popover__arrowPath").exists()).toBeTruthy();
-    });
-
-    it("renders footerContent prop correct", () => {
-        const footerContent = <div className="test">test</div>;
-
-        setup.setProps({
-            alwaysShow: true,
-            footerContent,
-            size: "medium",
-            primaryButton: {
-                title: "test",
-                onClick: () => {}
-            }
-        });
-
-        expect(provider().find(".test").exists()).toBeTruthy();
     });
 });

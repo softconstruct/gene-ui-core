@@ -29,7 +29,7 @@ import { Close, InfoOutline } from "@geneui/icons";
 
 // Components
 import { GeneUIDesignSystemContext } from "../../providers/GeneUIProvider";
-import Button, { IButtonProps } from "../Button";
+import Button from "../Button";
 
 // Styles
 import "./Popover.scss";
@@ -104,10 +104,6 @@ export const staticSides: Record<string, StaticSides> = {
     left: "right"
 } as const;
 
-interface IButtons extends Omit<IButtonProps, "children"> {
-    title: string;
-}
-
 export interface IPopoverProps {
     /**
      * Whether the popover is open initially. Defaults to `false`.
@@ -143,16 +139,6 @@ export interface IPopoverProps {
      * Function to update popover props dynamically.
      */
     setProps: Dispatch<SetStateAction<Record<string, unknown>>>;
-
-    /**
-     * Properties for the primary action button.
-     */
-    primaryButton?: IButtons;
-
-    /**
-     * Properties for the secondary action button.
-     */
-    secondaryButton?: IButtons;
 
     /**
      * Additional content displayed in the popover footer.
@@ -192,9 +178,6 @@ const Popover: FC<IPopoverProps> = ({
     alwaysShow,
     setProps,
     title,
-    primaryButton,
-    secondaryButton,
-    footerContent,
     withArrow = true,
     children,
     disableReposition = true
@@ -406,25 +389,7 @@ const Popover: FC<IPopoverProps> = ({
                                     />
                                 </div>
                             )}
-                            <div className="popover__body">
-                                <div className="popover__content">{children} </div>
-                            </div>
-                            {primaryButton && (
-                                <div className="popover__footer">
-                                    {size !== "small" && footerContent && footerContent}
-
-                                    <div className="popover__footer_buttons">
-                                        {secondaryButton && (
-                                            <Button {...secondaryButton} size="medium" appearance="inverse">
-                                                {secondaryButton.title}
-                                            </Button>
-                                        )}
-                                        <Button {...primaryButton} size="medium" appearance="primary">
-                                            {primaryButton.title}
-                                        </Button>
-                                    </div>
-                                </div>
-                            )}
+                            {children}
                         </div>
                     </div>
                 </FloatingPortal>
