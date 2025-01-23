@@ -1,92 +1,92 @@
 import { Placement } from "@floating-ui/utils";
 
 export const getPositionRect = (currentPopoverRect: DOMRect, position: Placement) => {
-    const popoverWidth = currentPopoverRect.width;
-    const popoverHeight = currentPopoverRect.height;
+    const { width, height, top, right, bottom, left } = currentPopoverRect;
+
     switch (position) {
         case "top":
             return {
-                top: currentPopoverRect.top - popoverHeight,
-                left: currentPopoverRect.left,
-                bottom: currentPopoverRect.top,
-                right: currentPopoverRect.left + popoverWidth
+                top: top - width,
+                left,
+                bottom: top,
+                right: left + width
             };
         case "right":
             return {
-                top: currentPopoverRect.top,
-                left: currentPopoverRect.right,
-                bottom: currentPopoverRect.top + popoverHeight,
-                right: currentPopoverRect.right + popoverWidth
+                top,
+                left: right,
+                bottom: top + height,
+                right: right + width
             };
         case "bottom":
             return {
-                top: currentPopoverRect.bottom,
-                left: currentPopoverRect.left,
-                bottom: currentPopoverRect.bottom + popoverHeight,
-                right: currentPopoverRect.left + popoverWidth
+                top: bottom,
+                left,
+                bottom: bottom + height,
+                right: left + width
             };
         case "left":
             return {
-                top: currentPopoverRect.top,
-                left: currentPopoverRect.left - popoverWidth,
-                bottom: currentPopoverRect.top + popoverHeight,
-                right: currentPopoverRect.left
+                top,
+                left: left - width,
+                bottom: top + height,
+                right: left
             };
         case "top-start":
             return {
-                top: currentPopoverRect.top - popoverHeight,
-                left: currentPopoverRect.left - popoverWidth / 2,
-                bottom: currentPopoverRect.top,
-                right: currentPopoverRect.left + popoverWidth / 2
+                top: top - height,
+                left: left - width / 2,
+                bottom: top,
+                right: left + width / 2
             };
         case "right-start":
             return {
-                top: currentPopoverRect.top - popoverHeight / 2,
-                left: currentPopoverRect.right,
-                bottom: currentPopoverRect.top + popoverHeight / 2,
-                right: currentPopoverRect.right + popoverWidth
+                top: top - height / 2,
+                left: right,
+                bottom: top + height / 2,
+                right: right + width
             };
         case "bottom-start":
             return {
-                top: currentPopoverRect.bottom,
-                left: currentPopoverRect.left - popoverWidth / 2,
-                bottom: currentPopoverRect.bottom + popoverHeight,
-                right: currentPopoverRect.left + popoverWidth / 2
+                top: bottom,
+                left: left - width / 2,
+                bottom: bottom + height,
+                right: left + width / 2
             };
         case "left-start":
             return {
-                top: currentPopoverRect.top - popoverHeight / 2,
-                left: currentPopoverRect.left - popoverWidth,
-                bottom: currentPopoverRect.top + popoverHeight / 2,
-                right: currentPopoverRect.left
+                top: top - height / 2,
+                left: left - width,
+                bottom: top + height / 2,
+                right: left
             };
         case "top-end":
             return {
-                top: currentPopoverRect.top - popoverHeight,
-                left: currentPopoverRect.right - popoverWidth,
-                bottom: currentPopoverRect.top,
-                right: currentPopoverRect.right
+                top: top - height,
+                left: right - width,
+                bottom: top,
+                right
             };
         case "right-end":
             return {
-                top: currentPopoverRect.bottom - popoverHeight,
-                left: currentPopoverRect.right,
-                bottom: currentPopoverRect.bottom,
-                right: currentPopoverRect.right + popoverWidth
+                top: bottom - height,
+                left: right,
+                bottom,
+                right: right + width
             };
         case "bottom-end":
             return {
-                top: currentPopoverRect.bottom,
-                left: currentPopoverRect.right - popoverWidth,
-                bottom: currentPopoverRect.bottom + popoverHeight,
-                right: currentPopoverRect.right
+                top: bottom,
+                left: right - width,
+                bottom: bottom + height,
+                right
             };
         case "left-end":
             return {
-                top: currentPopoverRect.top + popoverHeight / 2,
-                left: currentPopoverRect.left - popoverWidth,
-                bottom: currentPopoverRect.bottom - popoverHeight / 2,
-                right: currentPopoverRect.left
+                top: top + height / 2,
+                left: left - width,
+                bottom: bottom - height / 2,
+                right: left
             };
         default:
             return currentPopoverRect;

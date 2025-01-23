@@ -114,7 +114,7 @@ export interface IPopoverProps {
      * Define width and height of the popover.<br>
      * Possible values: <code> xLarge | large | medium | small </code>
      */
-    size: "xLarge" | "large" | "medium" | "small" | "mobile";
+    size?: "xLarge" | "large" | "medium" | "small" | "mobile";
 
     /**
      * Title displayed in the popover header.
@@ -167,13 +167,13 @@ export interface IPopoverProps {
 
 /**
  Popover displays additional content or information in an overlay box.
- It appears on top of the main content when triggered by a user action, 
+ It appears on top of the main content when triggered by a user action,
  such as a click or hover. Unlike tooltips, popovers can contain more
  complex and interactive content, including text, images, and form elements.
 */
 
 const Popover: FC<IPopoverProps> = ({
-    size,
+    size = "medium",
     position = "bottom-center",
     padding = 10,
     isOpen = false,
@@ -321,11 +321,7 @@ const Popover: FC<IPopoverProps> = ({
                 }
             });
 
-            if (leastOverlap > 0) {
-                hasOverlap = true;
-            } else {
-                hasOverlap = false;
-            }
+            hasOverlap = leastOverlap > 0;
 
             if (preventPosition !== bestPosition && !hasOverlap && !wosPosed.current.has(bestPosition)) {
                 wosPosed.current.set(bestPosition, true);
