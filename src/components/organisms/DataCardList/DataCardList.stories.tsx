@@ -14,7 +14,6 @@ const meta: Meta<typeof DataCardList> = {
     component: DataCardList,
     argTypes: {
         className: args({ control: "false", ...propCategory.appearance }),
-        width: args({ control: "number", ...propCategory.appearance }),
         size: args({ control: "select", ...propCategory.appearance, options: ["medium", "large"] }),
         data: args({ control: false, ...propCategory.content }),
         hasNextPage: args({ control: false, ...propCategory.others }),

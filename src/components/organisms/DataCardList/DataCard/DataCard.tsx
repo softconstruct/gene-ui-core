@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { AriaRole, FC, useState } from "react";
 
 // Component
 import KeyValue, { IKeyValueProps } from "../../../molecules/KeyValue";
@@ -35,9 +35,19 @@ interface RowData {
 type CardData = RowData[];
 
 interface IDataCardProps {
+    /**
+     * The data used to draw the DataCard components
+     */
     cardData: CardData;
+    /**
+     * DataCard size
+     * Possible values: `medium | large`;
+     */
     size?: IKeyValueProps["size"];
-    onActionsClick: () => void;
+    /**
+     * Aria role
+     */
+    role?: AriaRole;
 }
 
 const SHOWING_ROWS_COUNT = 6;
@@ -57,7 +67,7 @@ const valueRenderer = (value: RowValue) => {
 /**
  * DataCard Component is a row for DataCard component
  */
-const DataCard: FC<IDataCardProps> = ({ cardData, onActionsClick, size = "medium" }) => {
+const DataCard: FC<IDataCardProps> = ({ cardData, role, size = "medium" }) => {
     const [isShowMoreMenuOpen, setIsShowMoreMenuOpen] = useState(false);
     const isShowMoreVisible = cardData.length > SHOWING_ROWS_COUNT;
 
@@ -65,7 +75,7 @@ const DataCard: FC<IDataCardProps> = ({ cardData, onActionsClick, size = "medium
     console.log("isShowMoreMenuOpen", isShowMoreMenuOpen);
 
     return (
-        <div className="dataCard">
+        <div className="dataCard" role={role}>
             {cardData.slice(0, SHOWING_ROWS_COUNT).map(({ key, value, infoText }, index) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <KeyValue key={index} direction="horizontal" spaceBetween size={size}>
@@ -83,7 +93,7 @@ const DataCard: FC<IDataCardProps> = ({ cardData, onActionsClick, size = "medium
                         onClick={() => setIsShowMoreMenuOpen(true)}
                     />
                 )}
-                <Button text="Actions" appearance="secondary" size="large" onClick={onActionsClick} />
+                <Button text="Actions" appearance="secondary" size="large" onClick={() => {}} />
             </div>
         </div>
     );
