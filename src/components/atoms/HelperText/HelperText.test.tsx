@@ -24,7 +24,7 @@ describe("HelperText ", () => {
         expect(wrapper.find(`.helperText_size_${size}`).exists()).toBeTruthy();
     });
 
-    it.each<IHelperTextProps["type"]>(["rest", "danger", "warning"])('should have "%s" type', (type) => {
+    it.each<IHelperTextProps["type"]>(["rest", "error", "warning"])('should have "%s" type', (type) => {
         const wrapper = setup.setProps({ type });
 
         expect(wrapper.find(`.helperText_type_${type}`).exists()).toBeTruthy();
@@ -42,11 +42,6 @@ describe("HelperText ", () => {
     it("renders isDisabled prop correctly", () => {
         const wrapper = setup.setProps({ isDisabled: true });
         expect(wrapper.find(".helperText_disabled").exists()).toBeTruthy();
-    });
-
-    it("renders isLoading prop correctly", () => {
-        const wrapper = setup.setProps({ isLoading: true });
-        expect(wrapper.find(".helperText").text()).toStrictEqual("skeleton");
     });
 
     it("renders className prop correctly", () => {
