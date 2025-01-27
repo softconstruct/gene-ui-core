@@ -6,6 +6,7 @@
     row-gap: var(--guit-ref-spacing-large);
     border-radius: var(--guit-ref-radius-2xsmall);
     padding: var(--guit-ref-spacing-large);
+    overflow: scroll;
     box-shadow:
         var(--guit-sem-shadow-floating-2-position-x-1) var(--guit-sem-shadow-floating-2-position-y-1)
             var(--guit-sem-shadow-floating-2-blur-1) var(--guit-sem-shadow-floating-2-spread-1)

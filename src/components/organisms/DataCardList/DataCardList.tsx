@@ -76,7 +76,7 @@ const DataCardList: FC<IDataCardListProps> = ({
 
     const rowRenderer = ({ index, key, style }: ListRowProps, itemSize: IDataCardListProps["size"]) => (
         <div key={key} style={style} role="row">
-            <DataCard cardData={data[index]} size={itemSize} role="cell" />
+            <DataCard className="dataCardList__item" cardData={data[index]} size={itemSize} role="cell" />
         </div>
     );
 
@@ -86,11 +86,12 @@ const DataCardList: FC<IDataCardListProps> = ({
                 {({ onRowsRendered, registerChild }) => (
                     <>
                         <List
+                            className="dataCardList__virtualizedList"
                             ref={registerChild}
                             onRowsRendered={onRowsRendered}
                             rowRenderer={(props) => rowRenderer(props, size)}
                             height={dimensions.height}
-                            rowHeight={288}
+                            rowHeight={308}
                             rowCount={data.length}
                             width={dimensions.width}
                         />

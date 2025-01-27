@@ -1,4 +1,5 @@
 import React, { AriaRole, FC, useState } from "react";
+import classNames from "classnames";
 
 // Component
 import KeyValue, { IKeyValueProps } from "../../../molecules/KeyValue";
@@ -48,6 +49,11 @@ interface IDataCardProps {
      * Aria role
      */
     role?: AriaRole;
+    /**
+     * Additional class for the parent element.
+     * This prop should be used to set placement properties for the element relative to its parent using BEM conventions.
+     */
+    className?: string;
 }
 
 const SHOWING_ROWS_COUNT = 6;
@@ -67,7 +73,7 @@ const valueRenderer = (value: RowValue) => {
 /**
  * DataCard Component is a row for DataCard component
  */
-const DataCard: FC<IDataCardProps> = ({ cardData, role, size = "medium" }) => {
+const DataCard: FC<IDataCardProps> = ({ cardData, role, className, size = "medium" }) => {
     const [isShowMoreMenuOpen, setIsShowMoreMenuOpen] = useState(false);
     const isShowMoreVisible = cardData.length > SHOWING_ROWS_COUNT;
 
@@ -75,7 +81,7 @@ const DataCard: FC<IDataCardProps> = ({ cardData, role, size = "medium" }) => {
     console.log("isShowMoreMenuOpen", isShowMoreMenuOpen);
 
     return (
-        <div className="dataCard" role={role}>
+        <div className={classNames("dataCard", className)} role={role}>
             {cardData.slice(0, SHOWING_ROWS_COUNT).map(({ key, value, infoText }, index) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <KeyValue key={index} direction="horizontal" spaceBetween size={size}>
