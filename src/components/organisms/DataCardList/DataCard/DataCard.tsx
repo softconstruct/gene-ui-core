@@ -83,17 +83,18 @@ const DataCard: FC<IDataCardProps> = ({ cardData, role, size = "medium" }) => {
                     <Value>{valueRenderer(value)}</Value>
                 </KeyValue>
             ))}
-            <div>
+            <div className="dataCard__buttons">
                 {isShowMoreVisible && (
                     <Button
                         text="Show more"
                         appearance="secondary"
                         displayType="text"
                         size="large"
+                        fullWidth
                         onClick={() => setIsShowMoreMenuOpen(true)}
                     />
                 )}
-                <Button text="Actions" appearance="secondary" size="large" onClick={() => {}} />
+                <Button text="Actions" appearance="secondary" size="large" fullWidth onClick={() => {}} />
             </div>
         </div>
     );

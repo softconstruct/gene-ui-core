@@ -1,6 +1,8 @@
 .dataCardList {
-    // Your styles here
-    color: var(--guit-ref-color-magenta-500base);
-    font-size: var(--guit-sem-font-caption-large-medium-font-size);
     height: 100%;
+
+    &__loader {
+        margin-top: var(--guit-ref-spacing-xlarge);
+        text-align: center;
+    }
 }

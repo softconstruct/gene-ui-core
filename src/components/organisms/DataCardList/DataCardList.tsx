@@ -94,7 +94,11 @@ const DataCardList: FC<IDataCardListProps> = ({
                             rowCount={data.length}
                             width={dimensions.width}
                         />
-                        {isNextPageLoading && <Loader size="small" />}
+                        {isNextPageLoading && (
+                            <div className="dataCardList__loader">
+                                <Loader size="small" />
+                            </div>
+                        )}
                     </>
                 )}
             </InfiniteLoader>

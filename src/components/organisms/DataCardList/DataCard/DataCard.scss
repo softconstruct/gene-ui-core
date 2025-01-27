@@ -1,5 +1,22 @@
 .dataCard {
-    // Your styles here
-    color: var(--guit-ref-color-magenta-500base);
-    font-size: var(--guit-sem-font-caption-large-medium-font-size);
+    $this: &;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--guit-ref-spacing-large);
+    border-radius: var(--guit-ref-radius-2xsmall);
+    padding: var(--guit-ref-spacing-large);
+    box-shadow:
+        var(--guit-sem-shadow-floating-2-position-x-1) var(--guit-sem-shadow-floating-2-position-y-1)
+            var(--guit-sem-shadow-floating-2-blur-1) var(--guit-sem-shadow-floating-2-spread-1)
+            var(--guit-sem-color-floating-2-rgba-1),
+        var(--guit-sem-shadow-floating-2-position-x-2) var(--guit-sem-shadow-floating-2-position-y-2)
+            var(--guit-sem-shadow-floating-2-blur-2) var(--guit-sem-shadow-floating-2-spread-2)
+            var(--guit-sem-color-floating-2-rgba-2);
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--guit-ref-spacing-xsmall);
+    }
 }
