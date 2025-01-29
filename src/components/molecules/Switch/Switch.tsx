@@ -1,9 +1,12 @@
 import React, { FC } from "react";
 import classNames from "classnames";
-// Styles
-import "./Switch.scss";
+
+// Components
 import { CheckMark } from "@geneui/icons";
 import HelperText from "../../atoms/HelperText";
+
+// Styles
+import "./Switch.scss";
 
 interface ISwitchProps {
     /**
