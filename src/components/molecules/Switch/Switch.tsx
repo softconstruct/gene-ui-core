@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import classNames from "classnames";
 
 // Components
-import { CheckMark } from "@geneui/icons";
 import HelperText from "../../atoms/HelperText";
 
 // Styles
@@ -55,9 +54,7 @@ const Switch: FC<ISwitchProps> = ({ className, label, helperText, disabled, read
         >
             <label className="switch__label">
                 <input type="checkbox" className="switch__input" disabled={disabled} readOnly={!disabled && readOnly} />
-                <span className="switch__slider">
-                    <CheckMark size={16} className="switch__icon" />
-                </span>
+                <span className="switch__slider" />
                 {label && <span className="switch__labelText">{label}</span>}
             </label>
             {helperText && <HelperText text={helperText} className="switch__helperText" isDisabled={disabled} />}

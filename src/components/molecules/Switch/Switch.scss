@@ -106,11 +106,6 @@
         }
     }
 
-    &__icon {
-        margin-inline-start: 0.2rem;
-        transition: color var(--guit-ref-motion-duration-moderate-macro);
-    }
-
     &__labelText {
         font-family: var(--guit-sem-font-label-medium-default-semibold-font-family), sans-serif;
         font-size: var(--guit-sem-font-label-medium-default-semibold-font-size);
@@ -132,10 +127,6 @@
                 background-color: var(--guit-sem-color-foreground-neutral-1);
             }
         }
-
-        #{ $this }__icon {
-            color: var(--guit-sem-color-foreground-neutral-1);
-        }
     }
 
     &:not(:has(#{ $this }__input[disabled])) {
@@ -144,14 +135,7 @@
         }
     }
 
-    &:not(:has(#{ $this }__input[disabled], #{ $this }__input[readonly])) {
-        #{ $this }__icon {
-            color: var(--guit-sem-color-foreground-inverse);
-        }
-    }
-
     &:has(#{ $this }__input[disabled]) {
-        #{ $this }__icon,
         #{ $this }__labelText {
             color: var(--guit-sem-color-foreground-disabled);
         }
