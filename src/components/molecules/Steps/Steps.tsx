@@ -1,10 +1,8 @@
-import React, { FC } from "react";
+import React, { Children, cloneElement, FC, ReactNode } from "react";
 import classNames from "classnames";
 // Styles
 import "./Steps.scss";
-import { ErrorAlertFill, SuccessFill, UnavailableOutline } from "@geneui/icons";
-import Divider from "../../atoms/Divider";
-import Loader from "../../atoms/Loader";
+import { IStepProps } from "./Step";
 
 interface IStepsProps {
     /**
@@ -29,135 +27,54 @@ interface IStepsProps {
     direction?: "vertical" | "horizontal";
     /**
      */
-    style?: "dot" | "numeric";
+    type?: "dot" | "numeric";
     /**
      */
     isLinear?: boolean;
-    // fill Steps component props interface
+    // fill Steps component props interface,
+    children: ReactNode;
+    onChange?: (e: string | number) => void;
+    isLoading?: boolean;
+    disabled?: boolean;
+    error?: boolean;
+    state?: "incomplete" | "current" | "complete";
 }
 
 /**
  * Step component is used to guide users through a sequential process by breaking it down into distinct steps. It is commonly employed in multi-step forms, checkout processes, or workflows that require users to complete tasks in a specific order.
  */
-const Steps: FC<IStepsProps> = ({ label, description, direction, style, isLinear, className }) => {
+const Steps: FC<IStepsProps> = ({
+    label,
+    description,
+    direction,
+    type,
+    isLinear,
+    className,
+    children,
+    onChange,
+    isLoading,
+    disabled,
+    error,
+    state
+}) => {
     return (
-        <div className={classNames(`steps steps_direction_${direction} ${isLinear ? "steps_linear" : ""}`, className)}>
-            <div className="steps__wrapper">
-                {/* todo: 'Incomplete' state of step element */}
-                <div className="steps__step">
-                    <div className="steps__status">
-                        {/* todo: change icon to "Circle-Dashed" after adding icon to gene-ui-icons package */}
-                        {style === "dot" && <UnavailableOutline size={24} className="steps__status_icon" />}
+        <div className={classNames(`steps steps_direction_${direction}`, { steps_linear: isLinear }, className)}>
+            {Children.map(children, (step, i) => {
+                if (!React.isValidElement<IStepProps>(step)) return step;
 
-                        {/* todo: change '0' to current stem number */}
-                        {style === "numeric" && <span className="steps__status_icon steps__status_numeric">0</span>}
-
-                        <Divider className="steps__status_divider" vertical={direction === "vertical"} />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-
-                        {/* todo: 'swap' component for 'vertical' direction */}
-                        {direction === "vertical" && (
-                            <div className="steps__swap">{/* todo: place for 'swap' component */}</div>
-                        )}
-                    </div>
-                </div>
-
-                {/* todo: 'Disabled' state of step element, added className 'steps__step_disabled' */}
-                <div className="steps__step steps__step_disabled">
-                    <div className="steps__status">
-                        {/* todo: change icon to "Circle-Dashed" after adding icon to gene-ui-icons package */}
-                        {style === "dot" && <UnavailableOutline size={24} className="steps__status_icon" />}
-
-                        {/* todo: change '0' to current stem number */}
-                        {style === "numeric" && <span className="steps__status_icon steps__status_numeric">0</span>}
-
-                        <Divider className="steps__status_divider" vertical={direction === "vertical"} />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-                    </div>
-                </div>
-
-                {/* todo: 'Current' state of step element, added className 'steps__step_current' */}
-                <div className="steps__step steps__step_current">
-                    <div className="steps__status">
-                        {/* todo: change icon to "Circle-Half" after adding icon to gene-ui-icons package */}
-                        {style === "dot" && <UnavailableOutline size={24} className="steps__status_icon" />}
-
-                        {/* todo: change '0' to current stem number */}
-                        {style === "numeric" && <span className="steps__status_icon steps__status_numeric">0</span>}
-
-                        <Divider
-                            className="steps__status_divider"
-                            vertical={direction === "vertical"}
-                            appearance="brand"
-                        />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-                    </div>
-                </div>
-
-                {/* todo: 'Complete' state of step element, added className 'steps__step_success' */}
-                <div className="steps__step steps__step_success">
-                    <div className="steps__status">
-                        <SuccessFill size={24} className="steps__status_icon" />
-                        <Divider
-                            className="steps__status_divider"
-                            vertical={direction === "vertical"}
-                            appearance="brand"
-                        />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-                    </div>
-                </div>
-
-                {/* todo: 'Error' state of step element, added className 'steps__step_error' */}
-                <div className="steps__step steps__step_error">
-                    <div className="steps__status">
-                        <ErrorAlertFill size={24} className="steps__status_icon" />
-                        <Divider className="steps__status_divider" vertical={direction === "vertical"} />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-                    </div>
-                </div>
-
-                {/* todo: 'Loading' state of step element */}
-                <div className="steps__step">
-                    <div className="steps__status">
-                        <Loader size="small" />
-                        <Divider className="steps__status_divider" vertical={direction === "vertical"} />
-                    </div>
-                    <div className="steps__content">
-                        <button type="button" className="steps__label">
-                            {label}
-                        </button>
-                        <p className="steps__description">{description}</p>
-                    </div>
-                </div>
-            </div>
-
-            {/* todo: 'swap' component for 'horizontal' direction */}
-            {direction === "horizontal" && <div className="steps__swap">{/* todo: place for 'swap' component */}</div>}
+                return cloneElement(step, {
+                    direction,
+                    onChange: step.props.onChange || onChange,
+                    isLoading: step.props.isLoading || isLoading,
+                    stepNumber: step.props.stepNumber || i + 1,
+                    type: step.props.type || type,
+                    label: step.props.label || label,
+                    description: step.props.description || description,
+                    disabled: step.props.disabled || disabled,
+                    error: step.props.error || error,
+                    state: step.props.state || state
+                });
+            })}
         </div>
     );
 };

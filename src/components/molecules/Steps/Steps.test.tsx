@@ -3,11 +3,16 @@ import { ReactWrapper, mount } from "enzyme";
 
 // Components
 import Steps, { IStepsProps } from "./index";
+import Step from "./Step";
 
 describe("Steps ", () => {
     let setup: ReactWrapper<IStepsProps>;
     beforeEach(() => {
-        setup = mount(<Steps />);
+        setup = mount(
+            <Steps>
+                <Step />
+            </Steps>
+        );
     });
 
     it("renders without crashing", () => {

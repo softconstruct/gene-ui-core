@@ -1,13 +1,13 @@
 .steps {
     $this: &;
 
+    display: flex;
+
     &_direction {
         // horizontal direction styles
         &_horizontal {
-            #{ $this }__wrapper {
-                flex-direction: row;
-                margin-bottom: var(--guit-ref-spacing-large);
-            }
+            flex-direction: row;
+
             #{ $this }__step {
                 grid-template-rows: 2.4rem 1fr;
             }
@@ -21,21 +21,13 @@
 
         // vertical direction styles
         &_vertical {
-            display: inline-block;
+            flex-direction: column;
 
-            #{ $this }__wrapper {
-                flex-direction: column;
-            }
             #{ $this }__step {
                 grid-template-columns: 2.4rem 1fr;
             }
             #{ $this }__status {
                 flex-direction: column;
-            }
-            #{ $this }__swap {
-                align-self: stretch;
-                margin-block: var(--guit-ref-spacing-large);
-                margin-inline: var(--guit-ref-spacing-3xsmall);
             }
         }
     }
@@ -64,9 +56,6 @@
     }
 
     // main styles
-    &__wrapper {
-        display: flex;
-    }
 
     &__step {
         $that: &;
@@ -129,7 +118,6 @@
     &__status,
     &__content {
         max-width: 100%;
-        overflow: hidden;
     }
 
     &__status {
@@ -187,13 +175,5 @@
         font-weight: var(--guit-sem-font-body-medium-default-regular-font-weight);
         font-size: var(--guit-sem-font-body-medium-default-regular-font-size);
         line-height: var(--guit-sem-font-body-medium-default-regular-line-height);
-    }
-
-    &__swap {
-        height: 2.4rem;
-
-        // todo: remove those styles after inserting 'swap' component
-        background: #f4e1ec;
-        border: 0.1rem solid #a60063;
     }
 }
