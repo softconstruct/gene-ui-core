@@ -30,9 +30,20 @@
         "react-hooks", // React hooks plugin
         "@typescript-eslint", // TypeScript plugin
         "jsx-a11y", // Accessibility plugin
-        "prettier" // Prettier plugin
+        "prettier", // Prettier plugin
+        "enforce-children"
     ],
     "rules": {
+        // Gene UI components children rules
+        "enforce-children/enforce-children": [
+            "error",
+            {
+                "rules": {
+                    "Grid": ["Row"],
+                    "Row": ["Col"]
+                }
+            }
+        ],
         // Prettier
         "prettier/prettier": [
             "error",
