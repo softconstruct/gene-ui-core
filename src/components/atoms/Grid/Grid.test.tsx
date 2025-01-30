@@ -2,15 +2,13 @@ import React, { PropsWithChildren } from "react";
 import { ReactWrapper, mount } from "enzyme";
 
 // Components
-import Grid from "./index";
-
-const { Col, GridContainer, Row } = Grid;
+import { Grid, Col, Row } from "./index";
 
 describe("Grid ", () => {
     let setup: (children: PropsWithChildren) => ReactWrapper<unknown>;
 
     beforeEach(() => {
-        setup = ({ children }: PropsWithChildren) => mount(<GridContainer>{children}</GridContainer>);
+        setup = ({ children }: PropsWithChildren) => mount(<Grid>{children}</Grid>);
     });
 
     it("renders without crashing", () => {

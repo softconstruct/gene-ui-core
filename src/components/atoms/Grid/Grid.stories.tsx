@@ -5,13 +5,15 @@ import { Meta } from "@storybook/react";
 import { args, propCategory } from "../../../../stories/assets/storybook.globals";
 
 // Components
-import Grid, { ICol, IRow } from "./index";
+import { Grid, Row, Col } from "./index";
 
-const { Row, Col, GridContainer } = Grid;
-
-const meta: Meta<ICol & IRow> = {
+const meta: Meta = {
     title: "Atoms/Grid",
-    component: GridContainer,
+    component: Grid,
+    subcomponents: {
+        Row,
+        Col
+    },
     argTypes: {
         size: args({ control: "false", ...propCategory.content }),
         offset: args({ control: "false", ...propCategory.content }),
@@ -36,7 +38,7 @@ const style: CSSProperties = {
 
 const Template = () => {
     return (
-        <GridContainer>
+        <Grid>
             <Row>
                 <Col size={4}>
                     <div style={style}>Col 4</div>
@@ -66,7 +68,7 @@ const Template = () => {
                     <div style={style}>Col-6</div>
                 </Col>
             </Row>
-        </GridContainer>
+        </Grid>
     );
 };
 
@@ -76,7 +78,7 @@ StandardGridLayout.args = {};
 
 export const ColumnsWithOffset = () => {
     return (
-        <GridContainer>
+        <Grid>
             <Row>
                 <Col size={2} offset={2}>
                     <div style={style}>Col-2 offset-2</div>
@@ -108,13 +110,13 @@ export const ColumnsWithOffset = () => {
                     <div style={style}>Col-4 offset-0</div>
                 </Col>
             </Row>
-        </GridContainer>
+        </Grid>
     );
 };
 
 export const AdaptiveGridRow = () => {
     return (
-        <GridContainer>
+        <Grid>
             <Row flexible>
                 <Col size={3}>
                     <div style={style}>Col-1 </div>
@@ -141,6 +143,6 @@ export const AdaptiveGridRow = () => {
                     <div style={style}>Col-4 </div>
                 </Col>
             </Row>
-        </GridContainer>
+        </Grid>
     );
 };
