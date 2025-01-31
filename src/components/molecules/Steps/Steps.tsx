@@ -6,56 +6,54 @@ import { IStepProps } from "./Step";
 
 interface IStepsProps {
     /**
+     * Provide `<Step/>` components to be rendered in the `<Steps/>`
+     */
+    children: ReactNode;
+    /**
      * Additional class for the parent element.
      * This prop should be used to set placement properties for the element relative to its parent using BEM conventions.
      */
     className?: string;
-    /**
-     * Steps label
-     */
-    label?: string;
-    /**
-     * Steps description <br/>
-     * Possible values: <br/>
-     * Text - string
-     */
-    description?: string;
     /**
      * Steps direction <br/>
      * Possible values: `vertical | horizontal`
      */
     direction?: "vertical" | "horizontal";
     /**
+     * Steps type <br/>
+     * Possible values: `dot | numeric`
      */
     type?: "dot" | "numeric";
     /**
+     * This prop for label click ability. If true the labels are interactive else informative.
      */
     isLinear?: boolean;
-    // fill Steps component props interface,
-    children: ReactNode;
+    /**
+     * Fires when the user interact with Step label. Provides the Step id as a callback's argument.
+     */
     onChange?: (e: string | number) => void;
+    /**
+     * Loading state for Steps.
+     */
     isLoading?: boolean;
+    /**
+     * Disable state for Steps.
+     */
     disabled?: boolean;
-    error?: boolean;
-    state?: "incomplete" | "current" | "complete";
 }
 
 /**
  * Step component is used to guide users through a sequential process by breaking it down into distinct steps. It is commonly employed in multi-step forms, checkout processes, or workflows that require users to complete tasks in a specific order.
  */
 const Steps: FC<IStepsProps> = ({
-    label,
-    description,
-    direction,
+    direction = "horizontal",
     type,
     isLinear,
     className,
     children,
     onChange,
     isLoading,
-    disabled,
-    error,
-    state
+    disabled
 }) => {
     return (
         <div className={classNames(`steps steps_direction_${direction}`, { steps_linear: isLinear }, className)}>
@@ -64,15 +62,16 @@ const Steps: FC<IStepsProps> = ({
 
                 return cloneElement(step, {
                     direction,
-                    onChange: step.props.onChange || onChange,
+                    onChange,
+                    label: step.props.label,
+                    error: step.props.error,
+                    state: step.props.state,
                     isLoading: step.props.isLoading || isLoading,
                     stepNumber: step.props.stepNumber || i + 1,
                     type: step.props.type || type,
-                    label: step.props.label || label,
-                    description: step.props.description || description,
+                    description: step.props.description,
                     disabled: step.props.disabled || disabled,
-                    error: step.props.error || error,
-                    state: step.props.state || state
+                    id: step.props.id || i + 1
                 });
             })}
         </div>

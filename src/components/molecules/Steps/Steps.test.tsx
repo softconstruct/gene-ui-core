@@ -10,7 +10,7 @@ describe("Steps ", () => {
     beforeEach(() => {
         setup = mount(
             <Steps>
-                <Step />
+                <Step id={33} />
             </Steps>
         );
     });

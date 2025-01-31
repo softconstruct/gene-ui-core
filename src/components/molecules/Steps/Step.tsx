@@ -5,17 +5,47 @@ import Divider from "../../atoms/Divider";
 import { Loader } from "../../../index";
 
 interface IStepProps {
+    /**
+     * Steps type <br/>
+     * Possible values: `dot | numeric`
+     */
     type?: "dot" | "numeric";
-    direction?: "vertical" | "horizontal";
-    description?: string;
+    /**
+     * The text displayed as the label for the Step, describing its purpose.<br>
+     * The Label can be clickable on not. For more information see the isLinear prop.
+     */
     label?: string;
-    onChange?: (id: string | number) => void;
-    id?: string | number;
+    /**
+     * Extra information displayed with the label of step for clarity or guidance.
+     */
+    description?: string;
+    /**
+     * Unique id for Step.
+     */
+    id: string | number;
+    /**
+     * Loading state for Step.
+     */
     isLoading?: boolean;
+    /**
+     * If type is numeric you can provide the number.<br>
+     * By default starts with 1.
+     */
     stepNumber?: number;
+    /**
+     * Disable state for Steps.
+     */
     disabled?: boolean;
+    /**
+     * Error state for Step.
+     */
     error?: boolean;
+    /**
+     * Change the icon for step to mention the Step state.
+     */
     state?: "incomplete" | "current" | "complete";
+    direction?: "vertical" | "horizontal";
+    onChange?: (id: string | number) => void;
 }
 
 interface ITypesProps {
@@ -27,6 +57,8 @@ interface ITypesProps {
 }
 
 const Types: FC<ITypesProps> = ({ type, stepNumber, error, isLoading, state }) => {
+    const stepCount = stepNumber > 9 ? 9 : stepNumber;
+
     if (isLoading) {
         return <Loader size="small" />;
     }
@@ -45,7 +77,7 @@ const Types: FC<ITypesProps> = ({ type, stepNumber, error, isLoading, state }) =
         return <UnavailableOutline size={24} className="steps__status_icon" />;
     }
 
-    return <span className="steps__status_icon steps__status_numeric">{stepNumber}</span>;
+    return <span className="steps__status_icon steps__status_numeric">{stepCount}</span>;
 };
 
 const Step: FC<IStepProps> = ({
@@ -61,11 +93,7 @@ const Step: FC<IStepProps> = ({
     error,
     state
 }) => {
-    const changeHandler = () => {
-        if (onChange && id) {
-            onChange(id);
-        }
-    };
+    const changeHandler = () => onChange?.(id!);
 
     return (
         <div
@@ -79,17 +107,18 @@ const Step: FC<IStepProps> = ({
             <div className="steps__status">
                 <Types type={type} stepNumber={stepNumber ?? 1} error={error} isLoading={isLoading} state={state} />
 
-                <Divider className="steps__status_divider" vertical={direction === "vertical"} />
+                <Divider
+                    className="steps__status_divider"
+                    vertical={direction === "vertical"}
+                    appearance={state === "complete" && !disabled ? "brand" : "default"}
+                />
             </div>
             <div className="steps__content">
-                <button
-                    type="button"
-                    className="steps__label"
-                    onClick={changeHandler}
-                    {...(disabled ? { disabled } : {})}
-                >
-                    {label}
-                </button>
+                {label && (
+                    <button type="button" className="steps__label" onClick={changeHandler} disabled={disabled}>
+                        {label}
+                    </button>
+                )}
                 <p className="steps__description">{description}</p>
             </div>
         </div>
