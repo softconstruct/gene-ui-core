@@ -2,7 +2,7 @@ import React from "react";
 import { ReactWrapper, mount } from "enzyme";
 
 // Components
-import Steps, { IStepsProps } from "./index";
+import Steps, { IStepsProps } from "./Steps";
 import Step from "./Step";
 
 describe("Steps ", () => {

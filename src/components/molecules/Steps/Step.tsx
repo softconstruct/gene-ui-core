@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { ErrorAlertFill, SuccessFill, UnavailableOutline } from "@geneui/icons";
 import classNames from "classnames";
+
+// Components
 import Divider from "../../atoms/Divider";
 import { Loader } from "../../../index";
 
@@ -57,7 +59,11 @@ interface ITypesProps {
 }
 
 const Types: FC<ITypesProps> = ({ type, stepNumber, error, isLoading, state }) => {
-    const stepCount = stepNumber > 9 ? 9 : stepNumber;
+    const stepCount = (num: number) => {
+        if (!num || num <= 0) return 1;
+        if (num > 9) return 9;
+        return num;
+    };
 
     if (isLoading) {
         return <Loader size="small" />;
@@ -77,7 +83,7 @@ const Types: FC<ITypesProps> = ({ type, stepNumber, error, isLoading, state }) =
         return <UnavailableOutline size={24} className="steps__status_icon" />;
     }
 
-    return <span className="steps__status_icon steps__status_numeric">{stepCount}</span>;
+    return <span className="steps__status_icon steps__status_numeric">{stepCount(stepNumber)}</span>;
 };
 
 const Step: FC<IStepProps> = ({

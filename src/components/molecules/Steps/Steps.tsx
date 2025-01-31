@@ -1,8 +1,11 @@
 import React, { Children, cloneElement, FC, ReactNode } from "react";
 import classNames from "classnames";
+
+// Components
+import { IStepProps } from "./Step";
+
 // Styles
 import "./Steps.scss";
-import { IStepProps } from "./Step";
 
 interface IStepsProps {
     /**
