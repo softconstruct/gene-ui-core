@@ -141,9 +141,10 @@ const Checkbox: FC<ICheckboxProps> = ({
     }, [checked, checkedState, indeterminate]);
 
     return (
+        // todo: add "checkbox_error" classname in case of error message
         <div
             className={classNames(
-                "checkbox ",
+                "checkbox",
                 `checkbox_${type}`,
                 {
                     checkbox_disabled: disabled,

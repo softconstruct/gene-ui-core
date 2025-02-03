@@ -31,8 +31,8 @@ const meta: Meta<typeof Checkbox> = {
     },
     args: {
         label: "Label",
-        infoText: "info text",
-        helperText: "helper text"
+        infoText: "Info Text",
+        helperText: "Helper Text"
     } as ICheckboxProps
 };
 

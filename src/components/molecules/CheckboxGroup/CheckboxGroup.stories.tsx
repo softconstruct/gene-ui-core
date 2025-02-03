@@ -11,10 +11,17 @@ const meta: Meta<typeof CheckboxGroup> = {
     title: "Molecules/CheckboxGroup",
     component: CheckboxGroup,
     argTypes: {
+        label: args({ control: "text", ...propCategory.content }),
+        disabled: args({ control: "boolean", ...propCategory.states }),
+        helperText: args({ control: "text", ...propCategory.content }),
+        readOnly: args({ control: "boolean", ...propCategory.states }),
+        type: args({ control: "select", ...propCategory.appearance }),
         className: args({ control: "false", ...propCategory.appearance })
         // fill CheckboxGroup component argTypes
     },
     args: {
+        label: "Group Label",
+        helperText: "Helper Text"
         // fill CheckboxGroup component args
     } as ICheckboxGroupProps
 };
