@@ -75,15 +75,15 @@ const Types: FC<ITypesProps> = ({ type, stepNumber, error, isLoading, state }) =
 
     if (type === "dot") {
         if (state === "current") {
-            return <UnavailableOutline size={24} className="steps__status_icon" />;
+            return <UnavailableOutline size={24} className="step_type steps__status_icon steps__status_dot" />;
         }
         if (state === "complete") {
-            return <SuccessFill size={24} className="steps__status_icon" />;
+            return <SuccessFill size={24} className="step_type steps__status_icon steps__status_dot" />;
         }
-        return <UnavailableOutline size={24} className="steps__status_icon" />;
+        return <UnavailableOutline size={24} className="step_type steps__status_icon" />;
     }
 
-    return <span className="steps__status_icon steps__status_numeric">{stepCount(stepNumber)}</span>;
+    return <span className="step_type steps__status_icon steps__status_numeric">{stepCount(stepNumber)}</span>;
 };
 
 const Step: FC<IStepProps> = ({
@@ -121,7 +121,12 @@ const Step: FC<IStepProps> = ({
             </div>
             <div className="steps__content">
                 {label && (
-                    <button type="button" className="steps__label" onClick={changeHandler} disabled={disabled}>
+                    <button
+                        type="button"
+                        className="steps__label"
+                        onClick={changeHandler}
+                        disabled={disabled || isLoading}
+                    >
                         {label}
                     </button>
                 )}

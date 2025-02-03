@@ -14,6 +14,7 @@
             "jsx": true
         }
     },
+    "root": true,
     "extends": [
         "eslint:recommended", // Base ESLint recommended rules
         "plugin:@typescript-eslint/recommended", // TypeScript recommended rules
@@ -30,9 +31,18 @@
         "react-hooks", // React hooks plugin
         "@typescript-eslint", // TypeScript plugin
         "jsx-a11y", // Accessibility plugin
-        "prettier" // Prettier plugin
+        "prettier", // Prettier plugin
+        "enforce-children"
     ],
     "rules": {
+        "enforce-children/enforce-children": [
+            "error",
+            {
+                "rules": {
+                    "Steps": ["Step"]
+                }
+            }
+        ],
         // Prettier
         "prettier/prettier": [
             "error",
