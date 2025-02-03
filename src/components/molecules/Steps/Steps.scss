@@ -72,13 +72,13 @@
             #{ $this }__status_icon {
                 color: var(--guit-sem-color-foreground-disabled);
             }
+        }
 
-            #{ $this }__label {
-                pointer-events: none;
+        #{ $this }__label[disabled] {
+            pointer-events: none;
 
-                &:focus-visible {
-                    outline: none;
-                }
+            &:focus-visible {
+                outline: none;
             }
         }
 
