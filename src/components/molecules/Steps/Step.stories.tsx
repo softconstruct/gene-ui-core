@@ -5,12 +5,12 @@ import { Meta } from "@storybook/react";
 import { args, propCategory } from "../../../../stories/assets/storybook.globals";
 
 // Components
-import StepComponent, { IStepProps } from "./Step";
+import Step, { IStepProps } from "./Step";
 import Steps from "./Steps";
 
-const meta: Meta<typeof StepComponent> = {
+const meta: Meta<typeof Step> = {
     title: "Molecules/Steps",
-    component: StepComponent,
+    component: Step,
     argTypes: {
         direction: args({ control: "select", ...propCategory.appearance }),
         type: args({ control: "select", ...propCategory.appearance }),
@@ -36,10 +36,10 @@ const Template: FC<IStepProps> = (props) => {
     const { direction } = props;
     return (
         <Steps direction={direction}>
-            <StepComponent {...props} id={11} />
-            <StepComponent {...props} id={12} />
+            <Step {...props} id={11} />
+            <Step {...props} id={12} />
         </Steps>
     );
 };
 
-export const Step = Template.bind({});
+export const SingleStep = Template.bind({});
