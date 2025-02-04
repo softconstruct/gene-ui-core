@@ -1,6 +1,12 @@
 {
     "compilerOptions": {
-        "baseUrl": "../src",
+        "baseUrl": "./src",
+        "paths": {
+            "@components/*": ["components/*"],
+            "@hooks/*": ["hooks/*"],
+            "@assets/*": ["assets/*"],
+            "@types": ["types/index.ts"]
+        },
         "target": "es6",
         "module": "esnext",
         "moduleResolution": "node",
@@ -11,5 +17,5 @@
         "strict": true,
         "resolveJsonModule": true
     },
-    "include": ["../src/**/*.ts", "../src/**/index.tsx"]
+    "include": ["./src/**/*.ts", "./src/**/index.tsx"]
 }
