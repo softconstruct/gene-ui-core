@@ -1,5 +1,5 @@
 import React, { FC, JSX, useEffect, useRef, useState } from "react";
-import { IconProps, Dot } from "@geneui/icons";
+import { IconProps, CircleFilled } from "@geneui/icons";
 import classNames from "classnames";
 
 // Components
@@ -98,7 +98,7 @@ const Pill: FC<IPillProps> = ({
     if (Icon) {
         iconContent = <Icon size={iconSizes[size]} className="pill__icon" />;
     } else if (isWithDot) {
-        iconContent = <Dot size={iconSizes[size]} className="pill__icon" />;
+        iconContent = <CircleFilled size={iconSizes[size]} className="pill__icon" />;
     }
 
     return (
