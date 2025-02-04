@@ -143,28 +143,38 @@
         grid-gap: var(--guit-ref-spacing-xsmall);
         min-width: var(--guit-sem-dimension-width-3xlarge);
         max-width: 24rem;
+
+        &:last-child {
+            #{ $this }__status_divider {
+                display: none;
+            }
+        }
     }
 
     &__status {
-        $this: &;
+        $that: &;
 
         display: flex;
 
         &_icon {
             flex: 0 0 auto;
+
+            &_pending {
+                color: var(--guit-sem-color-foreground-brand);
+            }
         }
 
         // status classnames
-        &_defailt #{ $this }_icon {
+        &_defailt #{ $that }_icon {
             color: var(--guit-sem-color-background-neutral-4);
         }
-        &_active #{ $this }_icon {
+        &_active #{ $that }_icon {
             color: var(--guit-sem-color-foreground-selected);
         }
-        &_success #{ $this }_icon {
+        &_success #{ $that }_icon {
             color: var(--guit-sem-color-background-success-2);
         }
-        &_error #{ $this }_icon {
+        &_error #{ $that }_icon {
             color: var(--guit-sem-color-foreground-error);
         }
 

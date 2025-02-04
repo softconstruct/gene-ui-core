@@ -40,7 +40,7 @@ const TimelinePoint: FC<ITimelineProps> = ({ direction = "vertical", title, stat
         <div className="timeline__element">
             <div className={classNames(`timeline__status timeline__status_${status}`)}>
                 {status === "pending" ? (
-                    <Clock size={20} className="timeline__status_icon" />
+                    <Clock size={20} className="timeline__status_icon timeline__status_icon_pending" />
                 ) : (
                     <CircleFilled size={20} className="timeline__status_icon" />
                 )}
