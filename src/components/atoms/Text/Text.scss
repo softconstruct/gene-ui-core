@@ -91,6 +91,22 @@
             line-height: var(--guit-sem-font-label-small-default-medium-line-height);
         }
 
+        &_bodyLargeSemibold,
+        &_bodyLargeMedium,
+        &_bodyLargeRegular {
+            &_hasSpace {
+                margin-block-end: 2.4rem;
+            }
+        }
+
+        &_bodyMediumSemibold,
+        &_bodyMediumMedium,
+        &_bodyMediumRegular {
+            &_hasSpace {
+                margin-block-end: 2rem;
+            }
+        }
+
         &_bodyLargeSemibold {
             font-family: var(--guit-sem-font-body-large-default-semibold-font-family);
             font-size: var(--guit-sem-font-body-large-default-semibold-font-size);
@@ -133,6 +149,22 @@
             line-height: var(--guit-sem-font-body-medium-default-regular-line-height);
         }
 
+        &_captionLargeSemibold,
+        &_captionLargeMedium,
+        &_captionLargeRegular {
+            &_hasSpace {
+                margin-block-end: 1.6rem;
+            }
+        }
+
+        &_captionMediumSemibold,
+        &_captionMediumMedium,
+        &_captionMediumRegular {
+            &_hasSpace {
+                margin-block-end: 1.4rem;
+            }
+        }
+
         &_captionLargeSemibold {
             font-family: var(--guit-sem-font-caption-large-semibold-font-family);
             font-size: var(--guit-sem-font-caption-large-semibold-font-size);
@@ -155,6 +187,14 @@
             font-weight: var(--guit-sem-font-caption-large-regular-font-weight);
             line-height: var(--guit-sem-font-caption-large-regular-line-height);
             letter-spacing: var(--guit-sem-font-caption-large-regular-letter-spacing);
+        }
+
+        &_captionMediumSemibold {
+            font-family: var(--guit-sem-font-caption-medium-semibold-font-family);
+            font-size: var(--guit-sem-font-caption-medium-semibold-font-size);
+            font-weight: var(--guit-sem-font-caption-medium-semibold-font-weight);
+            line-height: var(--guit-sem-font-caption-medium-semibold-line-height);
+            letter-spacing: var(--guit-sem-font-caption-medium-semibold-letter-spacing);
         }
 
         &_captionMediumMedium {

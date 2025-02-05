@@ -66,6 +66,7 @@ interface ITextProps {
         | "captionLargeSemibold"
         | "captionLargeMedium"
         | "captionLargeRegular"
+        | "captionMediumSemibold"
         | "captionMediumMedium"
         | "captionMediumRegular";
     /**
