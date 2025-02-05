@@ -141,11 +141,7 @@ const Carousel: FC<ICarouselProps> = ({
                                 onClick={() => setSelectedIndex(index)}
                                 key={index}
                                 className={classNames(
-                                    `carousel__dot ${index === selectedIndex ? "carousel__dot_active" : ""}`,
-                                    {
-                                        carousel__dot_small:
-                                            count > 4 && (index < selectedIndex - 1 || index > selectedIndex + 1)
-                                    }
+                                    `carousel__dot ${index === selectedIndex ? "carousel__dot_active" : ""}`
                                 )}
                             />
                         ))}
