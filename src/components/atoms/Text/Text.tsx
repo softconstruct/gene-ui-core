@@ -1,5 +1,6 @@
-import React, { CSSProperties, FC } from "react";
+import React, { FC } from "react";
 import classNames from "classnames";
+
 // Styles
 import "./Text.scss";
 
@@ -13,9 +14,10 @@ interface ITextProps {
      * The HTML tag with which text will be rendered.<br/>
      * Possible values: `h1 | h2 | h3 | h4 | h5 | h6 | p | span`
      */
-    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+    as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
     /**
-     * Style variants
+     * Style variants.<br>
+     * Will affect on `font-family` ,`font-size` ,`font-weight` and `line-height`.<br/>
      * Possible values: `headingXLargeSemibold |`
         <br/> `headingLargeSemibold |`
         <br/> `headingMediumSemibold |`
@@ -67,69 +69,29 @@ interface ITextProps {
         | "captionMediumMedium"
         | "captionMediumRegular";
     /**
-     * Color of text
-     */
-    color?: CSSProperties["color"];
-    /**
-     * Text alignment
+     * Text alignment<br>
      * Possible values: `left | center | right`
      */
     alignment?: "left" | "center" | "right";
     /**
-     * Text font weight
-     * Possible values: `normal | bold`
-     */
-    fontWeight?: "normal" | "bold";
-    /**
-     * Text font size
-     * Possible values: `small | medium | large`
-     */
-    size?: "small" | "medium" | "large";
-    /**
-     * Text display option
-     * Possible values: `inline | block`
-     */
-    display?: "inline" | "block";
-    /**
-     * Text
+     * Text content
      */
     children: string;
 }
 
-const element = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    p: "p",
-    span: "span"
-};
-
 /**
  * Text component which has predefined tokens
  */
-const Text: FC<ITextProps> = ({
-    className,
-    variant,
-    children,
-    as = "span",
-    color,
-    alignment,
-    fontWeight,
-    size,
-    display
-}) => {
-    const Element = (element[as] ?? "span") as React.ElementType;
-    return (
-        <Element
-            className={classNames("text", { [`text_${variant}`]: Boolean(variant) }, className)}
-            style={{ display, color, textAlign: alignment, fontWeight, fontSize: size }}
-        >
-            {children}
-        </Element>
+const Text: FC<ITextProps> = ({ className, variant = "bodyMediumMedium", children, as, alignment = "left" }) => {
+    const Component = as;
+
+    const computedClassNames = classNames(
+        "text",
+        { [`text_variant_${variant}`]: variant, [`text_alignment_${alignment}`]: alignment },
+        className
     );
+
+    return <Component className={computedClassNames}>{children}</Component>;
 };
 
 export { ITextProps, Text as default };

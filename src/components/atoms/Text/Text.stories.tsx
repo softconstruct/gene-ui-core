@@ -15,25 +15,23 @@ const meta: Meta<typeof Text> = {
         children: args({ control: "text", ...propCategory.content }),
         variant: args({ control: "select", ...propCategory.appearance }),
         as: args({ control: "select", ...propCategory.appearance }),
-        color: args({ control: "text", ...propCategory.appearance }),
-        alignment: args({ control: "select", ...propCategory.appearance }),
-        fontWeight: args({ control: "select", ...propCategory.appearance }),
-        size: args({ control: "select", ...propCategory.appearance }),
-        display: args({ control: "select", ...propCategory.appearance })
+        alignment: args({ control: "select", ...propCategory.appearance })
     },
     args: {
         children: "Text content",
         variant: "headingLargeSemibold"
-    } as ITextProps,
-    parameters: {
-        chromatic: { disableSnapshot: true }
-    }
+    } as ITextProps
 };
 
 export default meta;
 
-const Template: FC<ITextProps> = (props) => <Text {...props} />;
+const Template: FC<ITextProps> = (props) => {
+    const { children } = props;
+    return (
+        <Text as="h1" {...props}>
+            {children}
+        </Text>
+    );
+};
 
 export const Default = Template.bind({});
-
-Default.args = {} as ITextProps;
