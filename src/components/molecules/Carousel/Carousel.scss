@@ -71,6 +71,8 @@
 
     &__button {
         position: absolute;
+        width: var(--guit-sem-dimension-width-medium);
+        height: var(--guit-sem-dimension-height-medium);
     }
 
     &__dots {
