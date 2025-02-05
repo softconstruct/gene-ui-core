@@ -108,7 +108,10 @@ const Carousel: FC<ICarouselProps> = ({
 
     return (
         <div
-            className={classNames(`carousel carousel_slider carousel_${size} carousel_${direction}`, className)}
+            className={classNames(
+                `carousel carousel_slider carousel_size_${size} carousel_direction_${direction}`,
+                className
+            )}
             ref={ref}
         >
             {areArrowsVisible && (

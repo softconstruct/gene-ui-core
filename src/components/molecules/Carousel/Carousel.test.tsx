@@ -30,12 +30,12 @@ describe("Carousel ", () => {
 
     it.each<ICarouselProps["direction"]>(["horizontal", "vertical"])("should have %s direction", (direction) => {
         const wrapper = setup.setProps({ direction });
-        expect(wrapper.find(".carousel").hasClass(`carousel_${direction}`)).toBeTruthy();
+        expect(wrapper.find(".carousel").hasClass(`carousel_direction_${direction}`)).toBeTruthy();
     });
 
     it.each<ICarouselProps["size"]>(["large", "small"])("should have %s size", (size) => {
         const wrapper = setup.setProps({ size });
-        expect(wrapper.find(".carousel").hasClass(`carousel_${size}`)).toBeTruthy();
+        expect(wrapper.find(".carousel").hasClass(`carousel_size_${size}`)).toBeTruthy();
     });
 
     it("slides forward when forward button is clicked", () => {
