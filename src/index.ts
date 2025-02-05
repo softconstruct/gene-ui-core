@@ -8,9 +8,13 @@ export { default as Divider, IDividerProps } from "./components/atoms/Divider";
 export { default as Info, IInfoProps } from "./components/atoms/Info";
 export { default as Button, IButtonProps } from "./components/atoms/Button";
 export { default as Text, ITextProps } from "./components/atoms/Text";
+export { default as Badge, IBadgeProps } from "./components/atoms/Badge";
+export { default as Scrollbar, IScrollbarProps } from "./components/atoms/Scrollbar";
 
 // Molecules
-export { default as Tooltip } from "./components/molecules/Tooltip";
+export { default as Tooltip, ITooltipProps } from "./components/molecules/Tooltip";
+export { default as ProgressBar, IProgressBarProps } from "./components/molecules/ProgressBar";
+export { default as Tag, ITagProps } from "./components/molecules/Tag";
 
 // Organisms
 
