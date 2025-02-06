@@ -3,7 +3,7 @@ import classNames from "classnames";
 // Styles
 import "./Timeline.scss";
 
-import { ITimelineProps } from "./ZTimelinePoint";
+import { ITimelineProps } from "./TimelinePoint";
 
 interface ITimelinesProps {
     /**

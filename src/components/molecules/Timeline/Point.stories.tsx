@@ -5,7 +5,7 @@ import { Meta } from "@storybook/react";
 import { args, propCategory } from "../../../../stories/assets/storybook.globals";
 
 // Components
-import TimelinePoint, { ITimelineProps } from "./ZTimelinePoint";
+import TimelinePoint, { ITimelineProps } from "./TimelinePoint";
 import Timelines from "./Timelines";
 
 const meta: Meta<typeof TimelinePoint> = {
@@ -35,4 +35,4 @@ const Template: FC<ITimelineProps> = (props) => {
         </Timelines>
     );
 };
-export const TimelinePoints = Template.bind({});
+export const SinglePoint = Template.bind({});

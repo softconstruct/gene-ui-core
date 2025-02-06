@@ -6,7 +6,7 @@ import { args, propCategory } from "../../../../stories/assets/storybook.globals
 
 // Components
 import TimelinesComponent, { ITimelinesProps } from "./Timelines";
-import TimelinePoint from "./ZTimelinePoint";
+import TimelinePoint from "./TimelinePoint";
 
 const meta: Meta<typeof TimelinesComponent> = {
     title: "Molecules/Timeline",
@@ -33,7 +33,7 @@ const inlineData = [
     { title: "Task E", description: "Description E", status: "success" }
 ] as const;
 
-const TemplateNew: FC<ITimelinesProps> = (props) => {
+const Template: FC<ITimelinesProps> = (props) => {
     return (
         <TimelinesComponent {...props}>
             {inlineData.map((timeline) => {
@@ -42,4 +42,4 @@ const TemplateNew: FC<ITimelinesProps> = (props) => {
         </TimelinesComponent>
     );
 };
-export const Timelines = TemplateNew.bind({});
+export const Timelines = Template.bind({});
