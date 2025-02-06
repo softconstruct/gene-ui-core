@@ -1,12 +1,13 @@
 import React, { FC, forwardRef, MouseEvent } from "react";
 import classNames from "classnames";
-import { IconProps } from "@geneui/icons";
 
-// Styles
-import "./Button.scss";
+import { IconProps } from "@geneui/icons";
 
 // Components
 import Loader from "@components/atoms/Loader";
+
+// Styles
+import "./Button.scss";
 
 const iconSizes: Record<"large" | "medium" | "small" | "XSmall", IconProps["size"]> = {
     large: 20,

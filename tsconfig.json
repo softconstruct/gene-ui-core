@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "paths": {
-            "@components/*": ["components/*"],
-            "@hooks/*": ["hooks/*"],
-            "@assets/*": ["assets/*"],
-            "@types": ["types/index.ts"]
+            "@components/*": ["src/components/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@assets/*": ["src/assets/*"],
+            "@types": ["src/types/index.ts"],
+            "stories": ["stories/*"]
         },
         "target": "es6",
         "module": "esnext",
@@ -17,5 +18,5 @@
         "strict": true,
         "resolveJsonModule": true
     },
-    "include": ["./src/**/*.ts", "./src/**/index.tsx"]
+    "include": ["./src/**/*.ts", "./src/**/index.tsx", "./src/**/*.tsx", "./stories/**/*.tsx"]
 }

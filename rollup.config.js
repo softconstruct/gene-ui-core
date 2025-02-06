@@ -2,9 +2,7 @@ import typescript from "@rollup/plugin-typescript";
 import { resolve as resolvePath } from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 import resolve from "@rollup/plugin-node-resolve";
-
 import alias from "@rollup/plugin-alias";
-
 import commonjs from "@rollup/plugin-commonjs";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
