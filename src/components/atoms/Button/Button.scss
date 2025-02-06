@@ -472,6 +472,7 @@
     }
 
     &_loading {
+        pointer-events: none;
         #{ $this }__loader {
             visibility: visible;
         }
