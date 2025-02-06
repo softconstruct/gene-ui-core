@@ -1,14 +1,15 @@
-import typescript from "@rollup/plugin-typescript";
-import { resolve as resolvePath } from "path";
-import { visualizer } from "rollup-plugin-visualizer";
-import resolve from "@rollup/plugin-node-resolve";
 import alias from "@rollup/plugin-alias";
 import commonjs from "@rollup/plugin-commonjs";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
-import postcss from "rollup-plugin-postcss";
-import prefixSelector from "postcss-prefix-selector";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 import autoprefixer from "autoprefixer";
+import { resolve as resolvePath } from "path";
+import prefixSelector from "postcss-prefix-selector";
+import postcss from "rollup-plugin-postcss";
+import { visualizer } from "rollup-plugin-visualizer";
+
 import { getDirectories, getFiles } from "./scripts/utils";
 
 const packageJson = require("./package.json");
