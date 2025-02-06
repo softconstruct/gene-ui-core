@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useRef, FocusEvent, useState, useMemo } from "react";
-import { CheckMark, MinusOutline } from "@geneui/icons";
+import { CheckMark, Minus } from "@geneui/icons";
 import classNames from "classnames";
 
 // Components
@@ -178,7 +178,7 @@ const Checkbox: FC<ICheckboxProps> = ({
                         />
                         <span className="checkbox__imitation">
                             {indeterminate && !checked ? (
-                                <MinusOutline className="checkbox__icon" size={16} />
+                                <Minus className="checkbox__icon" size={16} />
                             ) : (
                                 <CheckMark className="checkbox__icon" size={16} />
                             )}
