@@ -165,7 +165,7 @@
         }
 
         // status classnames
-        &_defailt #{ $that }_icon {
+        &_default #{ $that }_icon {
             color: var(--guit-sem-color-background-neutral-4);
         }
         &_active #{ $that }_icon {
